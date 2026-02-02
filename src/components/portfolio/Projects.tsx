@@ -8,6 +8,7 @@ import genvitexImage from '@/assets/genvitex-project.jpg';
 import mernImage from '@/assets/mern-crud-project.jpg';
 
 // React project images
+import appStoreImg from '@/assets/react-projects/app-store.png';
 import randomNumberImg from '@/assets/react-projects/random-number.png';
 import destinationSearchImg from '@/assets/react-projects/destination-search.png';
 import balanceWithdrawImg from '@/assets/react-projects/balance-withdraw.png';
@@ -20,6 +21,12 @@ import ratingImg from '@/assets/react-projects/rating.png';
 const Projects = () => {
   // React practice projects with screenshots and skill tags
   const reactProjects = [
+    {
+      title: 'App Store',
+      image: appStoreImg,
+      liveUrl: 'https://appmanish1903.ccbp.tech/',
+      skills: ['Tabs', 'Filter', 'Components'],
+    },
     {
       title: 'Random Number Generator',
       image: randomNumberImg,
