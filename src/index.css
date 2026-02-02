@@ -514,4 +514,10 @@
   .stats-glow {
     text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
   }
+
+  /* Tagline word styling */
+  .tagline-word {
+    @apply text-foreground/80;
+    text-shadow: 0 0 30px hsl(var(--primary) / 0.3);
+  }
 }
