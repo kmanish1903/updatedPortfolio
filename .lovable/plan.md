@@ -1,115 +1,97 @@
 
-
-## Plan: Add 3D Developer Workspace to Portfolio
+## Plan: Redesign Hero Section with "Create • Learn • Build" Theme
 
 ### Overview
-Add an interactive 3D computer desk/workspace scene to your Hero section using **React Three Fiber**. This will create a stunning first impression for recruiters, showcasing your skills with modern web technologies.
+Simplify and redesign the Hero section with a cleaner layout featuring your name prominently, the tagline "create • learn • build", and a clear call-to-action to connect. The 3D workspace stays on the right.
 
-### Design Concept
+### New Hero Design
 
 ```text
-┌─────────────────────────────────────────────────────────┐
-│                      Hero Section                        │
-│  ┌─────────────────┐     ┌─────────────────────────┐    │
-│  │   Your Info     │     │    3D Workspace         │    │
-│  │   Name, Title   │     │    ┌─────────────┐      │    │
-│  │   Buttons       │     │    │  Monitor    │      │    │
-│  │   Social Links  │     │    │  (glowing)  │      │    │
-│  │                 │     │    └─────┬───────┘      │    │
-│  │                 │     │    [Keyboard] [Mouse]   │    │
-│  │                 │     │    [Coffee Cup] [Plant] │    │
-│  │                 │     │         Desk            │    │
-│  └─────────────────┘     └─────────────────────────┘    │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│                          Hero Section                            │
+│                                                                   │
+│  ┌──────────────────────────┐   ┌─────────────────────────────┐ │
+│  │                          │   │                             │ │
+│  │  create • learn • build  │   │      3D Workspace           │ │
+│  │                          │   │      (Interactive)          │ │
+│  │      K. MANISH           │   │                             │ │
+│  │                          │   │       ┌─────────┐           │ │
+│  │   Final-year B.Tech CSE  │   │       │ Monitor │           │ │
+│  │   MERN Stack Developer   │   │       └────┬────┘           │ │
+│  │                          │   │    [Keyboard] [Mouse]       │ │
+│  │   ─────────────────────  │   │    [Coffee]    [Plant]      │ │
+│  │                          │   │         Desk                │ │
+│  │   Let's build something  │   │                             │ │
+│  │   amazing together       │   │                             │ │
+│  │                          │   │                             │ │
+│  │  [Connect With Me] 💬    │   │                             │ │
+│  │  [Download Resume] 📄    │   │                             │ │
+│  │                          │   │                             │ │
+│  │  [GitHub] [LinkedIn]     │   │                             │ │
+│  │                          │   │                             │ │
+│  └──────────────────────────┘   └─────────────────────────────┘ │
+│                                                                   │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### 3D Scene Elements (Built with Primitives)
-Since loading external 3D models can be slow, I'll create a stylized workspace using simple geometric shapes:
+### Text Content Changes
 
-1. **Monitor** - Rounded box with glowing screen effect
-2. **Monitor Stand** - Cylinder 
-3. **Desk Surface** - Flat box with rounded edges
-4. **Keyboard** - Thin box with key-like patterns
-5. **Mouse** - Small rounded box
-6. **Coffee Mug** - Cylinder with handle
-7. **Small Plant** - Simple geometric pot with sphere leaves
-8. **Floating Code Symbols** - `</>`, `{}` rotating around
+| Element | Current | New |
+|---------|---------|-----|
+| Tagline | "Engineer. Developer. Continuous Learner." | **"create • learn • build"** |
+| Greeting | "Hello, I'm 👋" | Remove or simplify |
+| Name | "K. Manish" | "K. MANISH" (larger, bolder) |
+| Sub-text | Typing effect only | Brief connection message |
+| CTA | "Contact Me" | **"Connect With Me"** |
 
-### Interactive Features
-- **Auto-rotation** - Scene slowly rotates for visual interest
-- **Mouse interaction** - Scene tilts slightly based on mouse position
-- **Glowing elements** - Monitor screen and accent lights pulse with your primary color
-- **Floating particles** - Small code-related particles float around
+### Visual Enhancements
 
-### Technical Implementation
+1. **"create • learn • build"** - Styled with:
+   - Animated text with staggered fade-in
+   - Dots styled as accent-colored bullets
+   - Subtle glow effect on each word
 
-#### Step 1: Install Dependencies
-```bash
-npm install @react-three/fiber@^8.18 @react-three/drei@^9.122.0 three@^0.169.0
-```
+2. **Name Display** - Enhanced with:
+   - Larger font size
+   - Gradient text effect
+   - Subtle text shadow
 
-#### Step 2: Create 3D Components
+3. **Connection Message** - New addition:
+   - "Let's build something amazing together" or similar
+   - Softer styling to invite engagement
 
-**New Files:**
-- `src/components/3d/DeveloperWorkspace.tsx` - Main 3D scene component
-- `src/components/3d/Monitor.tsx` - 3D monitor with glowing screen
-- `src/components/3d/Desk.tsx` - Desk surface
-- `src/components/3d/Accessories.tsx` - Keyboard, mouse, coffee cup, plant
+4. **Layout Order** - Fixed for all screens:
+   - Desktop: Text LEFT, 3D RIGHT
+   - Mobile: Text on TOP, 3D below (not reversed)
 
-#### Step 3: Update Hero Section
-- Change layout to split view (text left, 3D scene right)
-- On mobile: 3D scene shows smaller above or below text
-- Add loading fallback while 3D scene loads
+### Implementation Steps
 
-### Component Structure
+#### Step 1: Update Hero.tsx
 
-```tsx
-// DeveloperWorkspace.tsx
-<Canvas>
-  <ambientLight />
-  <directionalLight />
-  <OrbitControls autoRotate />
-  
-  <group position={[0, 0, 0]}>
-    <Monitor />           {/* Glowing screen */}
-    <Desk />              {/* Desk surface */}
-    <Keyboard />          {/* On desk */}
-    <Mouse />             {/* On desk */}
-    <CoffeeMug />         {/* Desk accessory */}
-    <Plant />             {/* Small desk plant */}
-    <FloatingCode />      {/* Rotating code symbols */}
-  </group>
-  
-  <Environment preset="city" />
-</Canvas>
-```
+**Key Changes:**
+- Add "create • learn • build" tagline at the top
+- Simplify greeting section
+- Add connection invitation text
+- Update button text to "Connect With Me"
+- Fix mobile order (text always first)
+- Keep typing effect for dynamic interest
 
-### Visual Style
-- **Color scheme**: Matches your portfolio (primary blue/purple gradient)
-- **Lighting**: Soft ambient + directional for depth
-- **Materials**: 
-  - Desk: Dark wood-like material
-  - Monitor: Metallic frame with emissive screen
-  - Accessories: Subtle colors that complement the theme
+### Mobile Responsiveness
 
-### Mobile Optimization
-- Reduced polygon count on mobile
-- Smaller canvas size
-- Disable auto-rotate on low-power devices
-- Show a static fallback image if WebGL is not supported
+- Text content stacks vertically on mobile
+- 3D workspace shows below text (smaller height)
+- All text remains readable and properly sized
 
-### Files to Create/Modify:
+### Files to Modify
 
-| File | Action |
-|------|--------|
-| `src/components/3d/DeveloperWorkspace.tsx` | Create - Main 3D scene |
-| `src/components/3d/WorkspaceElements.tsx` | Create - All 3D objects |
-| `src/components/portfolio/Hero.tsx` | Modify - Add 3D scene |
-| `package.json` | Modify - Add dependencies |
+| File | Changes |
+|------|---------|
+| `src/components/portfolio/Hero.tsx` | Update content, layout order, new tagline |
+| `src/index.css` | Add animation for "create • learn • build" (optional) |
 
 ### Expected Result
-- Eye-catching 3D workspace that slowly rotates
-- Professional look that impresses recruiters
-- Smooth performance with optimized primitives
-- Responsive design that works on all devices
-
+- Cleaner, more memorable first impression
+- Clear "create • learn • build" philosophy
+- Strong call-to-action to connect
+- Professional yet personal feel
+- 3D workspace on right as requested
