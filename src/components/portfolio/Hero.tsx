@@ -6,7 +6,7 @@ import { lazy, Suspense } from 'react';
 const DeveloperWorkspace = lazy(() => import('@/components/3d/DeveloperWorkspace'));
 
 const Hero = () => {
-  const typingText = useTypingEffect(['MERN Stack Developer', 'DevOps Enthusiast', 'Problem Solver', 'Continuous Learner'], 100, 50, 2000);
+  const typingText = useTypingEffect(['Full Stack Developer (MERN)', 'AI Enthusiast', 'Problem Solver', 'Continuous Learner'], 100, 50, 2000);
   
   const handleConnectWithMe = () => {
     const element = document.querySelector('#contact');
@@ -50,9 +50,11 @@ const Hero = () => {
             </h1>
             
             {/* Typing effect with role */}
+            <div className="text-base sm:text-lg md:text-xl text-muted-foreground mb-4 max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
+              <span>B.Tech CSE (AI & ML) Graduate – 2026</span>
+            </div>
+            
             <div className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl mx-auto lg:mx-0 flex flex-col sm:flex-row items-center justify-center lg:justify-start text-center lg:text-left gap-1 sm:gap-0">
-              <span>Final-year B.Tech CSE</span>
-              <span className="hidden sm:inline mx-2">|</span>
               <span className="text-primary font-semibold">
                 {typingText}
                 <span className="animate-pulse">|</span>
@@ -61,7 +63,7 @@ const Hero = () => {
 
             {/* Connection invitation message */}
             <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-md mx-auto lg:mx-0">
-              Let's build something <span className="text-primary font-semibold">amazing</span> together.
+              Let's build <span className="text-primary font-semibold">scalable</span> and <span className="text-primary font-semibold">impactful</span> web applications.
             </p>
 
             {/* Available badge */}
