@@ -7,6 +7,7 @@ import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { useToast } from '@/hooks/use-toast';
 import { EMAILJS_CONFIG } from '@/lib/emailjs';
+import TiltCard from '@/components/3d/TiltCard';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -115,29 +116,36 @@ const Contact = () => {
               </p>
             </div>
 
-            {/* Contact Details */}
+            {/* Contact Details with 3D hover */}
             <div className="space-y-4">
               {contactInfo.map((contact, index) => (
-                <div key={index} className="flex items-center space-x-4">
-                  <div className="flex-shrink-0 p-2 bg-primary/10 rounded-lg">
-                    <contact.icon className="h-5 w-5 text-primary" />
+                <TiltCard 
+                  key={index} 
+                  tiltAmount={5}
+                  glareEnabled={false}
+                  className="block"
+                >
+                  <div className="flex items-center space-x-4 p-3 rounded-lg bg-card/50 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-300">
+                    <div className="flex-shrink-0 p-2 bg-primary/10 rounded-lg">
+                      <contact.icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground">{contact.label}</p>
+                      {contact.href ? (
+                        <a 
+                          href={contact.href}
+                          className="text-muted-foreground hover:text-primary transition-smooth"
+                          target={contact.href.startsWith('http') ? '_blank' : undefined}
+                          rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        >
+                          {contact.value}
+                        </a>
+                      ) : (
+                        <p className="text-muted-foreground">{contact.value}</p>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium text-foreground">{contact.label}</p>
-                    {contact.href ? (
-                      <a 
-                        href={contact.href}
-                        className="text-muted-foreground hover:text-primary transition-smooth"
-                        target={contact.href.startsWith('http') ? '_blank' : undefined}
-                        rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      >
-                        {contact.value}
-                      </a>
-                    ) : (
-                      <p className="text-muted-foreground">{contact.value}</p>
-                    )}
-                  </div>
-                </div>
+                </TiltCard>
               ))}
             </div>
 
@@ -166,84 +174,86 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
-          <Card className="gradient-card border-0 shadow-custom animate-scale-in">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-foreground">
-                Send a Message
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Your Name
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Enter your full name"
-                    className="bg-background border-border focus:border-primary"
-                  />
-                </div>
+          {/* Contact Form with 3D effect */}
+          <TiltCard tiltAmount={4} glareEnabled={true}>
+            <Card className="gradient-card border-0 shadow-custom animate-scale-in">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold text-foreground">
+                  Send a Message
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                      Your Name
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Enter your full name"
+                      className="bg-background border-border focus:border-primary"
+                    />
+                  </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                    Email Address
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your email address"
-                    className="bg-background border-border focus:border-primary"
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      Email Address
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Enter your email address"
+                      className="bg-background border-border focus:border-primary"
+                    />
+                  </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                    Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    placeholder="Tell me about your project or just say hello..."
-                    className="bg-background border-border focus:border-primary resize-none"
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                      Message
+                    </label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Tell me about your project or just say hello..."
+                      className="bg-background border-border focus:border-primary resize-none"
+                    />
+                  </div>
 
-                <Button 
-                  type="submit" 
-                  size="lg" 
-                  disabled={isLoading}
-                  className="w-full gradient-hero text-white shadow-glow interactive-button disabled:opacity-50"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Mail className="mr-2 h-5 w-5" />
-                      Send Message
-                    </>
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    disabled={isLoading}
+                    className="w-full gradient-hero text-white shadow-glow interactive-button disabled:opacity-50"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="mr-2 h-5 w-5" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </TiltCard>
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import { Award, ExternalLink } from 'lucide-react';
 import certificate1 from '@/assets/certificate-1.png';
 import certificate2 from '@/assets/certificate-2.png';
 import certificate3 from '@/assets/certificate-3.png';
+import TiltCard from '@/components/3d/TiltCard';
 
 const Certificates = () => {
   const certificates = [
@@ -59,42 +60,54 @@ const Certificates = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {certificates.map((cert, index) => (
-            <Card key={cert.id} className="gradient-card border-0 shadow-custom card-hover animate-scale-in group" style={{ animationDelay: `${index * 150}ms` }}>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  {cert.image ? (
-                    <div className="mb-4 overflow-hidden rounded-lg">
-                      <img 
-                        src={cert.image} 
-                        alt={cert.title}
-                        className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
+            <TiltCard 
+              key={cert.id} 
+              className="h-full"
+              tiltAmount={10}
+              glareEnabled={true}
+            >
+              <Card 
+                className="gradient-card border-0 shadow-custom card-hover animate-scale-in group h-full" 
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                <CardContent className="p-6 h-full flex flex-col">
+                  <div className="text-center flex-1 flex flex-col">
+                    {cert.image ? (
+                      <div className="mb-4 overflow-hidden rounded-lg">
+                        <img 
+                          src={cert.image} 
+                          alt={cert.title}
+                          className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                    ) : (
+                      <div className="mx-auto mb-4 p-4 bg-primary/10 rounded-full w-fit">
+                        <Award className="h-8 w-8 text-primary" />
+                      </div>
+                    )}
+                    
+                    <h3 className="text-lg font-bold text-foreground mb-2">
+                      {cert.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      {cert.issuer}
+                    </p>
+                    
+                    <div className="mt-auto">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="w-full border-primary text-primary hover:bg-primary hover:text-white interactive-button"
+                        onClick={() => window.open(cert.url, '_blank')}
+                      >
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        View Certificate
+                      </Button>
                     </div>
-                  ) : (
-                    <div className="mx-auto mb-4 p-4 bg-primary/10 rounded-full w-fit">
-                      <Award className="h-8 w-8 text-primary" />
-                    </div>
-                  )}
-                  
-                  <h3 className="text-lg font-bold text-foreground mb-2">
-                    {cert.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {cert.issuer}
-                  </p>
-                  
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="w-full border-primary text-primary hover:bg-primary hover:text-white interactive-button"
-                      onClick={() => window.open(cert.url, '_blank')}
-                    >
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                      View Certificate
-                    </Button>
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                </CardContent>
+              </Card>
+            </TiltCard>
           ))}
         </div>
       </div>
