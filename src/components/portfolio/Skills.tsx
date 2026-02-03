@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import TiltCard from '@/components/3d/TiltCard';
 
 type SkillCategory = 'all' | 'frontend' | 'backend' | 'databases' | 'devops' | 'tools' | 'languages';
 
@@ -78,64 +79,66 @@ const Skills = () => {
           </div>
         </div>
 
-        {/* Skills Grid */}
+        {/* Skills Grid with 3D Card */}
         <div className="max-w-4xl mx-auto">
-          <Card className="gradient-card border-0 shadow-custom">
-            <CardContent className="p-4">
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
-                {allSkills.map((skill, index) => {
-                  const isHighlighted = isSkillHighlighted(skill);
-                  
-                  return (
-                    <div
-                      key={index}
-                      className={`
-                        group relative flex flex-col items-center gap-1.5 p-2 rounded-lg
-                        transition-all duration-300
-                        ${
-                          isHighlighted
-                            ? 'scale-105 opacity-100'
-                            : 'scale-95 opacity-40'
-                        }
-                      `}
-                      style={{
-                        transitionDelay: `${index * 20}ms`,
-                      }}
-                    >
-                      {/* Icon */}
+          <TiltCard tiltAmount={5} glareEnabled={true}>
+            <Card className="gradient-card border-0 shadow-custom">
+              <CardContent className="p-4">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+                  {allSkills.map((skill, index) => {
+                    const isHighlighted = isSkillHighlighted(skill);
+                    
+                    return (
                       <div
+                        key={index}
                         className={`
-                          text-2xl transition-transform duration-300
-                          ${isHighlighted ? 'group-hover:scale-110' : ''}
-                        `}
-                      >
-                        {skill.icon}
-                      </div>
-                      
-                      {/* Skill Name */}
-                      <span
-                        className={`
-                          text-xs font-medium text-center transition-colors duration-300
+                          group relative flex flex-col items-center gap-1.5 p-2 rounded-lg
+                          transition-all duration-300
                           ${
                             isHighlighted
-                              ? 'text-foreground'
-                              : 'text-muted-foreground'
+                              ? 'scale-105 opacity-100'
+                              : 'scale-95 opacity-40'
                           }
                         `}
+                        style={{
+                          transitionDelay: `${index * 20}ms`,
+                        }}
                       >
-                        {skill.name}
-                      </span>
-                      
-                      {/* Highlight Underline */}
-                      {isHighlighted && (
-                        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-8 h-0.5 gradient-hero rounded-full" />
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </CardContent>
-          </Card>
+                        {/* Icon with 3D hover effect */}
+                        <div
+                          className={`
+                            text-2xl transition-all duration-300
+                            ${isHighlighted ? 'group-hover:scale-125 group-hover:-translate-y-1' : ''}
+                          `}
+                        >
+                          {skill.icon}
+                        </div>
+                        
+                        {/* Skill Name */}
+                        <span
+                          className={`
+                            text-xs font-medium text-center transition-colors duration-300
+                            ${
+                              isHighlighted
+                                ? 'text-foreground'
+                                : 'text-muted-foreground'
+                            }
+                          `}
+                        >
+                          {skill.name}
+                        </span>
+                        
+                        {/* Highlight Underline */}
+                        {isHighlighted && (
+                          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-8 h-0.5 gradient-hero rounded-full" />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+          </TiltCard>
         </div>
       </div>
     </section>

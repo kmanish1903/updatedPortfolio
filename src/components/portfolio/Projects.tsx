@@ -6,7 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { ExternalLink, Github, Sparkles, Code2, Layers } from 'lucide-react';
 import genvitexImage from '@/assets/genvitex-project.jpg';
 import mernImage from '@/assets/mern-crud-project.jpg';
-
+import TiltCard from '@/components/3d/TiltCard';
 // React project images
 import appStoreImg from '@/assets/react-projects/app-store.png';
 import randomNumberImg from '@/assets/react-projects/random-number.png';
@@ -273,70 +273,73 @@ const Projects = () => {
     }
   ];
 
-  // Render React project card (glassmorphism + gradient border + skill tags)
+  // Render React project card (glassmorphism + gradient border + skill tags + 3D tilt)
   const renderReactProjectCard = (project: any, index: number) => (
-    <div
+    <TiltCard
       key={index}
       className="gradient-border-wrapper animate-scale-in"
-      style={{ animationDelay: `${index * 80}ms` }}
+      tiltAmount={8}
     >
-      <a
-        href={project.liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group relative block overflow-hidden rounded-xl glass-card shine-effect transition-all duration-500 hover:shadow-glow"
-      >
-        {/* Image */}
-        <div className="relative aspect-video overflow-hidden">
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
-          
-          {/* Hover Overlay with View Button */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-            <span className="flex items-center gap-2 text-primary-foreground font-semibold bg-primary px-5 py-2.5 rounded-full text-sm shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-              <ExternalLink className="h-4 w-4" />
-              View Live
-            </span>
-          </div>
+      <div style={{ animationDelay: `${index * 80}ms` }}>
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative block overflow-hidden rounded-xl glass-card shine-effect transition-all duration-500 hover:shadow-glow"
+        >
+          {/* Image */}
+          <div className="relative aspect-video overflow-hidden">
+            <img 
+              src={project.image} 
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+            
+            {/* Hover Overlay with View Button */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <span className="flex items-center gap-2 text-primary-foreground font-semibold bg-primary px-5 py-2.5 rounded-full text-sm shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <ExternalLink className="h-4 w-4" />
+                View Live
+              </span>
+            </div>
 
-          {/* React Badge Top Right */}
-          <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm rounded-full px-2.5 py-1 flex items-center gap-1.5 text-xs font-medium text-primary border border-primary/30">
-            <Code2 className="h-3 w-3" />
-            React
+            {/* React Badge Top Right */}
+            <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm rounded-full px-2.5 py-1 flex items-center gap-1.5 text-xs font-medium text-primary border border-primary/30">
+              <Code2 className="h-3 w-3" />
+              React
+            </div>
           </div>
-        </div>
-        
-        {/* Content Section */}
-        <div className="p-4 space-y-3">
-          <h3 className="font-bold text-foreground group-hover:text-primary transition-colors text-lg">
-            {project.title}
-          </h3>
           
-          {/* Skill Tags */}
-          <div className="flex flex-wrap gap-1.5">
-            {project.skills?.map((skill: string, skillIndex: number) => (
-              <Badge 
-                key={skillIndex} 
-                variant="outline" 
-                className="text-[10px] px-2 py-0.5 bg-primary/10 border-primary/30 text-primary"
-              >
-                {skill}
-              </Badge>
-            ))}
+          {/* Content Section */}
+          <div className="p-4 space-y-3">
+            <h3 className="font-bold text-foreground group-hover:text-primary transition-colors text-lg">
+              {project.title}
+            </h3>
+            
+            {/* Skill Tags */}
+            <div className="flex flex-wrap gap-1.5">
+              {project.skills?.map((skill: string, skillIndex: number) => (
+                <Badge 
+                  key={skillIndex} 
+                  variant="outline" 
+                  className="text-[10px] px-2 py-0.5 bg-primary/10 border-primary/30 text-primary"
+                >
+                  {skill}
+                </Badge>
+              ))}
+            </div>
           </div>
-        </div>
-      </a>
-    </div>
+        </a>
+      </div>
+    </TiltCard>
   );
 
   const renderProjectCard = (project: any, index: number) => (
-    <Card key={index} className="gradient-card border-0 shadow-custom project-card overflow-hidden animate-scale-in" style={{ animationDelay: `${index * 200}ms` }}>
+    <TiltCard key={index} className="h-full" tiltAmount={6}>
+      <Card className="gradient-card border-0 shadow-custom project-card overflow-hidden animate-scale-in h-full" style={{ animationDelay: `${index * 200}ms` }}>
       {project.image && (
         <div className="relative overflow-hidden">
           <img 
@@ -427,7 +430,8 @@ const Projects = () => {
           )}
         </div>
       </CardContent>
-    </Card>
+      </Card>
+    </TiltCard>
   );
 
   return (
