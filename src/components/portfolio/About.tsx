@@ -16,7 +16,7 @@ const About = () => {
     {
       icon: Target,
       title: 'Career Focus',
-      description: 'Full-Stack Developer & DevOps Engineer'
+      description: 'Full-Stack Developer (MERN)'
     },
     {
       icon: Heart,
@@ -63,13 +63,13 @@ const About = () => {
                   <GraduationCap className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                     Academic Excellence
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Final-year B.Tech Computer Science student with a strong academic foundation 
-                    in Data Structures, Algorithms, DBMS, and Object-Oriented Programming. Currently 
-                    mastering the MERN stack and exploring DevOps tools.
+                    B.Tech Computer Science and Engineering (AI & ML), Class of 2026, with a strong 
+                    academic foundation in Data Structures, Algorithms, DBMS, and Object-Oriented 
+                    Programming. Actively building full-stack applications using the MERN stack.
                   </p>
                 </div>
               </div>
@@ -88,9 +88,9 @@ const About = () => {
                     Professional Vision
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Self-driven and value-oriented, I focus on industry-relevant skills with a 
-                    passion for DevOps practices, full-stack applications, and scalable solutions. 
-                    Known for consistency, confidence, and clarity in thought.
+                    B.Tech Computer Science (AI & ML) graduate (2026) with a strong academic foundation 
+                    in Data Structures, Algorithms, DBMS, and Object-Oriented Programming. Currently 
+                    mastering the MERN stack and gaining exposure to DevOps fundamentals.
                   </p>
                 </div>
               </div>

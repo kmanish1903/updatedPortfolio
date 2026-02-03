@@ -106,10 +106,12 @@ const Contact = () => {
           <div className="space-y-8 animate-fade-in-up">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-6">Get in Touch</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                B.Tech CSE (AI & ML) graduate – 2026, seeking opportunities as a Full-Stack Developer (MERN). 
+                Passionate about building scalable web applications and learning DevOps practices.
+              </p>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                I'm currently seeking opportunities as a Full-Stack Developer or DevOps Engineer. 
-                Whether you have a project in mind, want to collaborate, or just want to say hello, 
-                I'd love to hear from you.
+                Open to projects, collaborations, and meaningful tech conversations.
               </p>
             </div>
 
