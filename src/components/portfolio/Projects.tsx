@@ -17,6 +17,9 @@ import browserHistoryImg from '@/assets/react-projects/browser-history.png';
 import counterImg from '@/assets/react-projects/counter.png';
 import todoImg from '@/assets/react-projects/todo.png';
 import ratingImg from '@/assets/react-projects/rating.png';
+import natureGalleryImg from '@/assets/react-projects/nature-gallery.png';
+import coinTossImg from '@/assets/react-projects/coin-toss.png';
+import statesCapitalsImg from '@/assets/react-projects/states-capitals.png';
 
 const Projects = () => {
   // React practice projects with screenshots and skill tags
@@ -74,6 +77,24 @@ const Projects = () => {
       image: ratingImg,
       liveUrl: 'https://reactcp11rating.ccbp.tech/',
       skills: ['Conditional UI', 'Events'],
+    },
+    {
+      title: 'Nature Photography',
+      image: natureGalleryImg,
+      liveUrl: 'https://kmanishgally.ccbp.tech/',
+      skills: ['Gallery', 'Thumbnails', 'State'],
+    },
+    {
+      title: 'Coin Toss Game',
+      image: coinTossImg,
+      liveUrl: 'https://kmanishcoin.ccbp.tech/',
+      skills: ['Random', 'useState', 'Counter'],
+    },
+    {
+      title: 'States & Capitals',
+      image: statesCapitalsImg,
+      liveUrl: 'https://kmanishcapital.ccbp.tech/',
+      skills: ['Select', 'Lookup', 'Data'],
     },
   ];
 
