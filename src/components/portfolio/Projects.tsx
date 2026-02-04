@@ -25,6 +25,24 @@ const Projects = () => {
   // React practice projects with screenshots and skill tags
   const reactProjects = [
     {
+      title: 'Nature Photography',
+      image: natureGalleryImg,
+      liveUrl: 'https://kmanishgally.ccbp.tech/',
+      skills: ['Gallery', 'Thumbnails', 'State'],
+    },
+    {
+      title: 'Coin Toss Game',
+      image: coinTossImg,
+      liveUrl: 'https://kmanishcoin.ccbp.tech/',
+      skills: ['Random', 'useState', 'Counter'],
+    },
+    {
+      title: 'States & Capitals',
+      image: statesCapitalsImg,
+      liveUrl: 'https://kmanishcapital.ccbp.tech/',
+      skills: ['Select', 'Lookup', 'Data'],
+    },
+    {
       title: 'App Store',
       image: appStoreImg,
       liveUrl: 'https://appmanish1903.ccbp.tech/',
@@ -77,24 +95,6 @@ const Projects = () => {
       image: ratingImg,
       liveUrl: 'https://reactcp11rating.ccbp.tech/',
       skills: ['Conditional UI', 'Events'],
-    },
-    {
-      title: 'Nature Photography',
-      image: natureGalleryImg,
-      liveUrl: 'https://kmanishgally.ccbp.tech/',
-      skills: ['Gallery', 'Thumbnails', 'State'],
-    },
-    {
-      title: 'Coin Toss Game',
-      image: coinTossImg,
-      liveUrl: 'https://kmanishcoin.ccbp.tech/',
-      skills: ['Random', 'useState', 'Counter'],
-    },
-    {
-      title: 'States & Capitals',
-      image: statesCapitalsImg,
-      liveUrl: 'https://kmanishcapital.ccbp.tech/',
-      skills: ['Select', 'Lookup', 'Data'],
     },
   ];
 
