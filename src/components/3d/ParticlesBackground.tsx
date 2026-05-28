@@ -34,8 +34,9 @@ const FloatingParticles = () => {
 
   useFrame((state) => {
     if (particlesRef.current) {
-      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-      particlesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.01) * 0.1;
+      // Ambient rotation + responsive mouse-pointer coordinate parallax drift!
+      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.01 + state.pointer.x * 0.1;
+      particlesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.005) * 0.05 + state.pointer.y * 0.08;
       
       const positions = particlesRef.current.geometry.attributes.position.array as Float32Array;
       for (let i = 1; i < positions.length; i += 3) {

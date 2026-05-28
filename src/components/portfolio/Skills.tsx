@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import TiltCard from '@/components/3d/TiltCard';
+import SkillSphere from '@/components/3d/SkillSphere';
+import { playHover } from '@/lib/audio';
 
 type SkillCategory = 'all' | 'frontend' | 'backend' | 'databases' | 'devops' | 'tools' | 'languages';
 
@@ -49,21 +51,29 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-12 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 animate-fade-in-up">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-            Skills
+    <section id="skills" className="py-20 bg-background relative overflow-hidden">
+      {/* Glow background decoration */}
+      <div className="absolute right-0 top-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute left-0 bottom-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-12 animate-fade-in-up">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            Skills & Constellations
           </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Interact with the spinning 3D constellation sphere or filter key skills below.
+          </p>
         </div>
 
         {/* Category Tabs */}
-        <div className="mb-6 flex justify-center">
+        <div className="mb-10 flex justify-center">
           <div className="inline-flex flex-wrap gap-2 p-1.5 rounded-lg bg-card/50 backdrop-blur-sm border border-border">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
+                onMouseEnter={playHover}
                 className={`
                   px-4 py-1.5 rounded-md text-sm font-medium transition-all duration-300
                   ${
@@ -79,66 +89,75 @@ const Skills = () => {
           </div>
         </div>
 
-        {/* Skills Grid with 3D Card */}
-        <div className="max-w-4xl mx-auto">
-          <TiltCard tiltAmount={5} glareEnabled={true}>
-            <Card className="gradient-card border-0 shadow-custom">
-              <CardContent className="p-4">
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
-                  {allSkills.map((skill, index) => {
-                    const isHighlighted = isSkillHighlighted(skill);
-                    
-                    return (
-                      <div
-                        key={index}
-                        className={`
-                          group relative flex flex-col items-center gap-1.5 p-2 rounded-lg
-                          transition-all duration-300
-                          ${
-                            isHighlighted
-                              ? 'scale-105 opacity-100'
-                              : 'scale-95 opacity-40'
-                          }
-                        `}
-                        style={{
-                          transitionDelay: `${index * 20}ms`,
-                        }}
-                      >
-                        {/* Icon with 3D hover effect */}
+        {/* 3D Sphere alongside Grid */}
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
+          {/* 3D Spinning Skill Constellation Sphere */}
+          <div className="flex-1 w-full flex items-center justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
+            <SkillSphere />
+          </div>
+          
+          {/* Skills Grid Card with 3D Tilt */}
+          <div className="flex-1 w-full max-w-xl lg:max-w-none">
+            <TiltCard tiltAmount={5} glareEnabled={true}>
+              <Card className="gradient-card border-0 shadow-custom bg-card/60 backdrop-blur-md">
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3.5">
+                    {allSkills.map((skill, index) => {
+                      const isHighlighted = isSkillHighlighted(skill);
+                      
+                      return (
                         <div
+                          key={index}
+                          onMouseEnter={isHighlighted ? playHover : undefined}
                           className={`
-                            text-2xl transition-all duration-300
-                            ${isHighlighted ? 'group-hover:scale-125 group-hover:-translate-y-1' : ''}
-                          `}
-                        >
-                          {skill.icon}
-                        </div>
-                        
-                        {/* Skill Name */}
-                        <span
-                          className={`
-                            text-xs font-medium text-center transition-colors duration-300
+                            group relative flex flex-col items-center gap-2 p-2.5 rounded-xl
+                            transition-all duration-300 border border-transparent
                             ${
                               isHighlighted
-                                ? 'text-foreground'
-                                : 'text-muted-foreground'
+                                ? 'scale-105 opacity-100 bg-primary/5 border-primary/10 hover:border-primary/30 hover:bg-primary/10'
+                                : 'scale-95 opacity-40'
                             }
                           `}
+                          style={{
+                            transitionDelay: `${index * 15}ms`,
+                          }}
                         >
-                          {skill.name}
-                        </span>
-                        
-                        {/* Highlight Underline */}
-                        {isHighlighted && (
-                          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-8 h-0.5 gradient-hero rounded-full" />
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-          </TiltCard>
+                          {/* Icon with 3D hover effect */}
+                          <div
+                            className={`
+                              text-2xl transition-all duration-300
+                              ${isHighlighted ? 'group-hover:scale-125 group-hover:-translate-y-1' : ''}
+                            `}
+                          >
+                            {skill.icon}
+                          </div>
+                          
+                          {/* Skill Name */}
+                          <span
+                            className={`
+                              text-xs font-semibold text-center transition-colors duration-300
+                              ${
+                                isHighlighted
+                                  ? 'text-foreground'
+                                  : 'text-muted-foreground/60'
+                              }
+                            `}
+                          >
+                            {skill.name}
+                          </span>
+                          
+                          {/* Highlight Underline */}
+                          {isHighlighted && (
+                            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-6 h-0.5 gradient-hero rounded-full" />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            </TiltCard>
+          </div>
         </div>
       </div>
     </section>

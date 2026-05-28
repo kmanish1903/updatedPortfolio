@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { getMutedState, setMutedState, playClick, playHover } from '@/lib/audio';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
+  const [soundMuted, setSoundMuted] = useState(true); // default true for safety
 
   const navItems = [
     { label: 'About', href: '#about' },
@@ -17,6 +19,9 @@ const Header = () => {
   ];
 
   useEffect(() => {
+    // Read initial sound muted state
+    setSoundMuted(getMutedState());
+
     const handleScroll = () => {
       // Update scrolled state
       setScrolled(window.scrollY > 50);
@@ -41,7 +46,18 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSoundToggle = () => {
+    const newState = !soundMuted;
+    setSoundMuted(newState);
+    setMutedState(newState);
+    // synthesize sound on click
+    if (!newState) {
+      setTimeout(() => playClick(), 50);
+    }
+  };
+
   const scrollToSection = (href: string) => {
+    playClick();
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -61,7 +77,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo with hover animation */}
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => { playClick(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onMouseEnter={playHover}
             className="font-bold text-xl text-primary hover:scale-110 transition-transform duration-300 cursor-pointer"
           >
             K. Manish
@@ -75,6 +92,7 @@ const Header = () => {
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
+                  onMouseEnter={playHover}
                   className={`
                     relative text-sm font-medium transition-all duration-300
                     ${isActive ? 'text-primary scale-105' : 'text-muted-foreground hover:text-foreground'}
@@ -89,21 +107,35 @@ const Header = () => {
               );
             })}
           </nav>
-
-          {/* Theme Toggle and Mobile Menu */}
+ 
+          {/* Sound, Theme and Mobile Menu Toggle */}
           <div className="flex items-center space-x-2">
+            {/* Audio Toggle Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleSoundToggle}
+              onMouseEnter={playHover}
+              title={soundMuted ? "Unmute interface sound effects" : "Mute interface sound effects"}
+              className="text-muted-foreground hover:text-primary transition-colors h-9 w-9 rounded-md"
+            >
+              {soundMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4 animate-pulse text-primary" />}
+            </Button>
+
             <ThemeToggle />
+            
             <Button
               variant="ghost"
               size="sm"
               className="md:hidden interactive-button"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => { playClick(); setIsMenuOpen(!isMenuOpen); }}
+              onMouseEnter={playHover}
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </Button>
           </div>
         </div>
-
+ 
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden animate-fade-in">
@@ -114,6 +146,7 @@ const Header = () => {
                   <button
                     key={item.label}
                     onClick={() => scrollToSection(item.href)}
+                    onMouseEnter={playHover}
                     className={`
                       block w-full text-left px-3 py-2 rounded-lg transition-all duration-300
                       ${isActive 

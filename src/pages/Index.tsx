@@ -9,6 +9,7 @@ import Certificates from '@/components/portfolio/Certificates';
 import Contact from '@/components/portfolio/Contact';
 import ScrollProgress from '@/components/portfolio/ScrollProgress';
 import { useIsMobile } from '@/hooks/use-mobile';
+import InteractiveCursor from '@/components/3d/InteractiveCursor';
 
 const SplashScreen = lazy(() => import('@/components/3d/SplashScreen'));
 const ParticlesBackground = lazy(() => import('@/components/3d/ParticlesBackground'));
@@ -35,6 +36,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      {/* Global Interactive Cursor Particle Trail */}
+      <InteractiveCursor />
+
       {/* 3D Splash Screen - only on first visit */}
       {showSplash && (
         <Suspense fallback={null}>

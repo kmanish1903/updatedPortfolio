@@ -294,6 +294,15 @@ const Projects = () => {
     }
   ];
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   // Render React project card (glassmorphism + gradient border + skill tags + 3D tilt)
   const renderReactProjectCard = (project: any, index: number) => (
     <TiltCard
@@ -306,10 +315,19 @@ const Projects = () => {
           href={project.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onMouseMove={handleMouseMove}
           className="group relative block overflow-hidden rounded-xl glass-card shine-effect transition-all duration-500 hover:shadow-glow"
         >
+          {/* Dynamic Spotlight mouse-glare refraction (minimal and decent but extraordinary) */}
+          <div 
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
+            style={{
+              background: 'radial-gradient(250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(0, 240, 255, 0.12), transparent 80%)'
+            }}
+          />
+
           {/* Image */}
-          <div className="relative aspect-video overflow-hidden">
+          <div className="relative aspect-video overflow-hidden z-10">
             <img 
               src={project.image} 
               alt={project.title}
@@ -335,7 +353,7 @@ const Projects = () => {
           </div>
           
           {/* Content Section */}
-          <div className="p-4 space-y-3">
+          <div className="p-4 space-y-3 relative z-10">
             <h3 className="font-bold text-foreground group-hover:text-primary transition-colors text-lg">
               {project.title}
             </h3>
@@ -360,9 +378,21 @@ const Projects = () => {
 
   const renderProjectCard = (project: any, index: number) => (
     <TiltCard key={index} className="h-full" tiltAmount={6}>
-      <Card className="gradient-card border-0 shadow-custom project-card overflow-hidden animate-scale-in h-full" style={{ animationDelay: `${index * 200}ms` }}>
+      <Card 
+        onMouseMove={handleMouseMove}
+        className="group gradient-card border-0 shadow-custom project-card overflow-hidden animate-scale-in h-full relative" 
+        style={{ animationDelay: `${index * 200}ms` }}
+      >
+      {/* Dynamic Spotlight mouse-glare refraction */}
+      <div 
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
+        style={{
+          background: 'radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(185, 0, 255, 0.08), transparent 80%)'
+        }}
+      />
+
       {project.image && (
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden z-10">
           <img 
             src={project.image} 
             alt={project.title}
@@ -373,7 +403,7 @@ const Projects = () => {
       )}
       
       {project.images && (
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden z-10">
           <Carousel className="w-full">
             <CarouselContent>
               {project.images.map((imageSrc: string, imgIndex: number) => (
@@ -393,7 +423,7 @@ const Projects = () => {
         </div>
       )}
       
-      <CardHeader>
+      <CardHeader className="relative z-10">
         <CardTitle className="text-xl font-bold text-foreground">
           {project.title}
         </CardTitle>
@@ -402,7 +432,7 @@ const Projects = () => {
         </p>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 relative z-10">
         {/* Technologies */}
         <div>
           <h4 className="font-semibold text-foreground mb-2">Technologies</h4>
