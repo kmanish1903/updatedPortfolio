@@ -51,31 +51,31 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-20 bg-background relative overflow-hidden">
+    <section id="skills" className="py-10 bg-background relative overflow-hidden scroll-mt-20">
       {/* Glow background decoration */}
       <div className="absolute right-0 top-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute left-0 bottom-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12 animate-fade-in-up">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Skills & Constellations
+        <div className="text-center mb-6 animate-fade-in-up">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+            Skills
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Interact with the spinning 3D constellation sphere or filter key skills below.
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+            A curated set of technologies I use to design, develop, and deploy modern applications.
           </p>
         </div>
 
         {/* Category Tabs */}
-        <div className="mb-10 flex justify-center">
-          <div className="inline-flex flex-wrap gap-2 p-1.5 rounded-lg bg-card/50 backdrop-blur-sm border border-border">
+        <div className="mb-5 flex justify-center">
+          <div className="inline-flex flex-wrap gap-2 p-1 rounded-lg bg-card/50 backdrop-blur-sm border border-border">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
                 onMouseEnter={playHover}
                 className={`
-                  px-4 py-1.5 rounded-md text-sm font-medium transition-all duration-300
+                  px-3.5 py-1 rounded-md text-xs sm:text-sm font-medium transition-all duration-300
                   ${
                     activeCategory === category.id
                       ? 'gradient-hero text-white shadow-glow'
@@ -90,7 +90,7 @@ const Skills = () => {
         </div>
 
         {/* 3D Sphere alongside Grid */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-6 max-w-6xl mx-auto">
           {/* 3D Spinning Skill Constellation Sphere */}
           <div className="flex-1 w-full flex items-center justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
             <SkillSphere />
@@ -98,10 +98,10 @@ const Skills = () => {
           
           {/* Skills Grid Card with 3D Tilt */}
           <div className="flex-1 w-full max-w-xl lg:max-w-none">
-            <TiltCard tiltAmount={5} glareEnabled={true}>
+            <TiltCard tiltAmount={4} glareEnabled={true}>
               <Card className="gradient-card border-0 shadow-custom bg-card/60 backdrop-blur-md">
-                <CardContent className="p-6">
-                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3.5">
+                <CardContent className="p-4">
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
                     {allSkills.map((skill, index) => {
                       const isHighlighted = isSkillHighlighted(skill);
                       
@@ -110,7 +110,7 @@ const Skills = () => {
                           key={index}
                           onMouseEnter={isHighlighted ? playHover : undefined}
                           className={`
-                            group relative flex flex-col items-center gap-2 p-2.5 rounded-xl
+                            group relative flex flex-col items-center gap-1.5 p-2 rounded-xl
                             transition-all duration-300 border border-transparent
                             ${
                               isHighlighted
@@ -119,14 +119,14 @@ const Skills = () => {
                             }
                           `}
                           style={{
-                            transitionDelay: `${index * 15}ms`,
+                            transitionDelay: `${index * 12}ms`,
                           }}
                         >
                           {/* Icon with 3D hover effect */}
                           <div
                             className={`
-                              text-2xl transition-all duration-300
-                              ${isHighlighted ? 'group-hover:scale-125 group-hover:-translate-y-1' : ''}
+                              text-xl transition-all duration-300
+                              ${isHighlighted ? 'group-hover:scale-120 group-hover:-translate-y-0.5' : ''}
                             `}
                           >
                             {skill.icon}
@@ -135,7 +135,7 @@ const Skills = () => {
                           {/* Skill Name */}
                           <span
                             className={`
-                              text-xs font-semibold text-center transition-colors duration-300
+                              text-[10px] sm:text-xs font-semibold text-center transition-colors duration-300
                               ${
                                 isHighlighted
                                   ? 'text-foreground'

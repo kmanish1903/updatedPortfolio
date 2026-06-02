@@ -34,6 +34,7 @@ export const InteractiveCursor = () => {
   const speed = useRef<number>(0);
   const isHovered = useRef<boolean>(false);
   const clickScale = useRef<number>(1);
+  const isDraggingCanvas = useRef<boolean>(false);
   const [active, setActive] = useState<boolean>(false);
 
   useEffect(() => {
@@ -69,6 +70,9 @@ export const InteractiveCursor = () => {
       const dy = e.clientY - mouse.current.y;
       speed.current = Math.sqrt(dx * dx + dy * dy);
 
+      // Skip spawning trail particles if the user is dragging a 3D canvas
+      if (isDraggingCanvas.current) return;
+
       // Spawn trail particles based on cursor speed
       const spawnCount = Math.min(4, Math.floor(speed.current * 0.15));
       for (let i = 0; i < spawnCount; i++) {
@@ -89,6 +93,13 @@ export const InteractiveCursor = () => {
 
     // On Click - Spawn expanding visual shockwaves
     const handleMouseDown = (e: MouseEvent) => {
+      const targetElement = e.target as HTMLElement;
+      // If clicking a canvas element (OrbitControls, Skill Constellation, etc.), suppress custom cursor
+      if (targetElement && targetElement.tagName === 'CANVAS') {
+        isDraggingCanvas.current = true;
+        return;
+      }
+
       clickScale.current = 0.6;
       
       const clickColor = isHovered.current ? '#ffffff' : '#00f0ff';
@@ -104,6 +115,7 @@ export const InteractiveCursor = () => {
     };
 
     const handleMouseUp = () => {
+      isDraggingCanvas.current = false;
       clickScale.current = 1;
     };
 
@@ -223,8 +235,8 @@ export const InteractiveCursor = () => {
       }
       ctx.restore();
 
-      // 3. Render Custom Interactive Cursor Orbs
-      if (active) {
+      // 3. Render Custom Interactive Cursor Orbs (suppressed while dragging canvas for premium UX)
+      if (active && !isDraggingCanvas.current) {
         ctx.save();
         
         // Inner cursor core dot

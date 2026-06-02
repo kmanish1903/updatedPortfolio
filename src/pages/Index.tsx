@@ -1,7 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import Header from '@/components/portfolio/Header';
 import Hero from '@/components/portfolio/Hero';
-import About from '@/components/portfolio/About';
 import Stats from '@/components/portfolio/Stats';
 import Projects from '@/components/portfolio/Projects';
 import Skills from '@/components/portfolio/Skills';
@@ -35,35 +34,42 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#090d16]">
       {/* Global Interactive Cursor Particle Trail */}
       <InteractiveCursor />
 
-      {/* 3D Splash Screen - only on first visit */}
-      {showSplash && (
-        <Suspense fallback={null}>
+      {showSplash ? (
+        <Suspense fallback={
+          <div className="fixed inset-0 z-[100] bg-[#090d16] flex flex-col items-center justify-center select-none overflow-hidden">
+            <div className="relative w-20 h-20">
+              <div className="absolute inset-0 border-4 border-primary/20 rounded-full" />
+              <div className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+            </div>
+          </div>
+        }>
           <SplashScreen onComplete={handleSplashComplete} />
         </Suspense>
-      )}
+      ) : (
+        <>
+          {/* Particles Background - desktop only */}
+          {!isMobile && (
+            <Suspense fallback={null}>
+              <ParticlesBackground />
+            </Suspense>
+          )}
 
-      {/* Particles Background - desktop only */}
-      {!isMobile && !showSplash && (
-        <Suspense fallback={null}>
-          <ParticlesBackground />
-        </Suspense>
+          <ScrollProgress />
+          <Header />
+          <main>
+            <Hero />
+            <Stats />
+            <Projects />
+            <Skills />
+            <Certificates />
+            <Contact />
+          </main>
+        </>
       )}
-
-      <ScrollProgress />
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Stats />
-        <Projects />
-        <Skills />
-        <Certificates />
-        <Contact />
-      </main>
     </div>
   );
 };

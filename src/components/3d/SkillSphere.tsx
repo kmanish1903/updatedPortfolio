@@ -54,7 +54,7 @@ export const SkillSphere = () => {
     let animationFrameId: number;
     const tags: Tag[] = [];
     const N = skillsList.length;
-    const radius = 170; // Sphere radius in pixels
+    const radius = 125; // Sphere radius in pixels
 
     // Fibonacci sphere algorithm to distribute points evenly in 3D space
     for (let i = 0; i < N; i++) {
@@ -290,7 +290,7 @@ export const SkillSphere = () => {
   return (
     <div 
       ref={containerRef} 
-      className="w-full max-w-[420px] aspect-square flex items-center justify-center relative cursor-grab active:cursor-grabbing mx-auto"
+      className="w-full max-w-[340px] aspect-square flex items-center justify-center relative cursor-grab active:cursor-grabbing mx-auto"
       onClick={() => playClick()}
     >
       <canvas 

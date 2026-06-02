@@ -90,58 +90,58 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-background">
+    <section id="contact" className="py-10 bg-background scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-6 animate-fade-in-up">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
             Let's Connect
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
             I'm always open to discussing new opportunities, interesting projects, 
             or just having a conversation about technology and development.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {/* Contact Information */}
-          <div className="space-y-8 animate-fade-in-up">
+          <div className="space-y-4 animate-fade-in-up">
             <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Get in Touch</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Get in Touch</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-2">
                 B.Tech CSE (AI & ML) graduate – 2026, seeking opportunities as a Full-Stack Developer (MERN). 
                 Passionate about building scalable web applications and learning DevOps practices.
               </p>
-              <p className="text-muted-foreground leading-relaxed mb-8">
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                 Open to projects, collaborations, and meaningful tech conversations.
               </p>
             </div>
 
             {/* Contact Details with 3D hover */}
-            <div className="space-y-4">
+            <div className="space-y-2.5">
               {contactInfo.map((contact, index) => (
                 <TiltCard 
                   key={index} 
-                  tiltAmount={5}
+                  tiltAmount={3}
                   glareEnabled={false}
                   className="block"
                 >
-                  <div className="flex items-center space-x-4 p-3 rounded-lg bg-card/50 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-300">
+                  <div className="flex items-center space-x-4 p-2.5 rounded-lg bg-card/50 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-300">
                     <div className="flex-shrink-0 p-2 bg-primary/10 rounded-lg">
-                      <contact.icon className="h-5 w-5 text-primary" />
+                      <contact.icon className="h-4.5 w-4.5 text-primary" />
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">{contact.label}</p>
+                      <p className="text-xs sm:text-sm font-medium text-foreground">{contact.label}</p>
                       {contact.href ? (
                         <a 
                           href={contact.href}
-                          className="text-muted-foreground hover:text-primary transition-smooth"
+                          className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-smooth"
                           target={contact.href.startsWith('http') ? '_blank' : undefined}
                           rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                         >
                           {contact.value}
                         </a>
                       ) : (
-                        <p className="text-muted-foreground">{contact.value}</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{contact.value}</p>
                       )}
                     </div>
                   </div>
@@ -150,24 +150,24 @@ const Contact = () => {
             </div>
 
             {/* Quick Actions */}
-            <div className="pt-8">
+            <div className="pt-4">
               <div className="flex space-x-4">
                 <Button 
                   variant="outline" 
-                  size="lg" 
-                  className="flex-1 border-primary text-primary hover:bg-primary hover:text-white interactive-button"
+                  size="default" 
+                  className="flex-1 h-10 border-primary text-primary hover:bg-primary hover:text-white interactive-button"
                   onClick={() => window.open('https://linkedin.com/in/kmanish1903', '_blank')}
                 >
-                  <Linkedin className="mr-2 h-5 w-5" />
+                  <Linkedin className="mr-2 h-4 w-4" />
                   LinkedIn
                 </Button>
                 <Button 
                   variant="outline" 
-                  size="lg" 
-                  className="flex-1 border-primary text-primary hover:bg-primary hover:text-white interactive-button"
+                  size="default" 
+                  className="flex-1 h-10 border-primary text-primary hover:bg-primary hover:text-white interactive-button"
                   onClick={() => window.open('https://github.com/kmanish1903', '_blank')}
                 >
-                  <Github className="mr-2 h-5 w-5" />
+                  <Github className="mr-2 h-4 w-4" />
                   GitHub
                 </Button>
               </div>
@@ -175,17 +175,17 @@ const Contact = () => {
           </div>
 
           {/* Contact Form with 3D effect */}
-          <TiltCard tiltAmount={4} glareEnabled={true}>
+          <TiltCard tiltAmount={3} glareEnabled={true}>
             <Card className="gradient-card border-0 shadow-custom animate-scale-in">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-foreground">
+              <CardHeader className="py-4">
+                <CardTitle className="text-xl font-bold text-foreground">
                   Send a Message
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+              <CardContent className="pb-4 pt-0">
+                <form onSubmit={handleSubmit} className="space-y-3.5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="name" className="block text-xs font-medium text-foreground mb-1">
                       Your Name
                     </label>
                     <Input
@@ -196,12 +196,12 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Enter your full name"
-                      className="bg-background border-border focus:border-primary"
+                      className="h-9 bg-background border-border focus:border-primary text-sm"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="email" className="block text-xs font-medium text-foreground mb-1">
                       Email Address
                     </label>
                     <Input
@@ -212,40 +212,40 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="Enter your email address"
-                      className="bg-background border-border focus:border-primary"
+                      className="h-9 bg-background border-border focus:border-primary text-sm"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="message" className="block text-xs font-medium text-foreground mb-1">
                       Message
                     </label>
                     <Textarea
                       id="message"
                       name="message"
                       required
-                      rows={5}
+                      rows={3.5}
                       value={formData.message}
                       onChange={handleInputChange}
                       placeholder="Tell me about your project or just say hello..."
-                      className="bg-background border-border focus:border-primary resize-none"
+                      className="bg-background border-border focus:border-primary resize-none text-sm"
                     />
                   </div>
 
                   <Button 
                     type="submit" 
-                    size="lg" 
+                    size="default" 
                     disabled={isLoading}
-                    className="w-full gradient-hero text-white shadow-glow interactive-button disabled:opacity-50"
+                    className="w-full h-10 gradient-hero text-white shadow-glow interactive-button disabled:opacity-50"
                   >
                     {isLoading ? (
                       <>
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Sending...
                       </>
                     ) : (
                       <>
-                        <Mail className="mr-2 h-5 w-5" />
+                        <Mail className="mr-2 h-4 w-4" />
                         Send Message
                       </>
                     )}

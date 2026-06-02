@@ -7,6 +7,7 @@ import { ExternalLink, Github, Sparkles, Code2, Layers } from 'lucide-react';
 import genvitexImage from '@/assets/genvitex-project.jpg';
 import mernImage from '@/assets/mern-crud-project.jpg';
 import TiltCard from '@/components/3d/TiltCard';
+import MindCareShowcase from './MindCareShowcase';
 // React project images
 import appStoreImg from '@/assets/react-projects/app-store.png';
 import randomNumberImg from '@/assets/react-projects/random-number.png';
@@ -486,7 +487,7 @@ const Projects = () => {
   );
 
   return (
-    <section id="projects" className="py-20 gradient-subtle">
+    <section id="projects" className="py-20 gradient-subtle scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
@@ -498,7 +499,7 @@ const Projects = () => {
           </p>
         </div>
 
-        <Tabs defaultValue="react" className="w-full">
+        <Tabs defaultValue="featured" className="w-full">
           <TabsList className="grid w-full grid-cols-5 mb-8">
             <TabsTrigger value="featured">Featured</TabsTrigger>
             <TabsTrigger value="react">React</TabsTrigger>
@@ -507,7 +508,76 @@ const Projects = () => {
             <TabsTrigger value="responsive">Responsive</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="featured">
+          <TabsContent value="featured" className="space-y-12">
+            {/* MindCare AI Ultimate 3D Showcase Block */}
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 animate-fade-in pt-4">
+              {/* Left Details Block - Downsized to give more area to screenshots */}
+              <div className="lg:w-[20%] w-full space-y-6 text-left flex-shrink-0">
+                {/* MY WORK Badge strictly matching mockup! */}
+                <div className="flex items-center gap-2 animate-fade-in pl-1">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_8px_rgba(0,240,255,0.8)]"></span>
+                  </span>
+                  <span className="text-[10px] font-bold font-mono tracking-[0.35em] text-foreground/80 uppercase">
+                    MY WORK
+                  </span>
+                </div>
+
+                {/* Typography Heading strictly matching mockup style! */}
+                <div className="space-y-1">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight uppercase select-none">
+                    MindCare <span className="bg-gradient-to-r from-cyan-400 via-primary-hover to-purple-500 bg-clip-text text-transparent filter drop-shadow-[0_0_12px_rgba(59,130,246,0.3)]">Ai</span>
+                  </h3>
+                  <p className="text-[9px] sm:text-[10px] font-bold font-mono tracking-[0.2em] text-primary/90 uppercase pl-0.5 animate-pulse">
+                    AI MENTAL WELLNESS
+                  </p>
+                </div>
+
+                {/* Short Paragraph Description */}
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed pl-0.5">
+                  Your AI-powered companion for mental wellness, mood tracking, goals, insights, and support.
+                </p>
+
+                {/* Primary Action Buttons strictly matching mockup styles! */}
+                <div className="flex flex-col gap-3.5 pt-2 max-w-[260px]">
+                  <Button 
+                    size="lg" 
+                    className="gradient-hero text-white shadow-glow interactive-button w-full h-11 px-8 text-xs font-bold font-mono border border-primary/20 rounded-full"
+                    onClick={() => window.open('https://calm-mind-builder.vercel.app/', '_blank')}
+                  >
+                    <ExternalLink className="mr-2.5 h-4 w-4" />
+                    LIVE DEMO
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-white/10 hover:border-primary text-foreground hover:text-white bg-transparent interactive-button w-full h-11 px-8 text-xs font-bold font-mono rounded-full"
+                    onClick={() => window.open('https://github.com/kmanish1903', '_blank')}
+                  >
+                    <Github className="mr-2.5 h-4 w-4" />
+                    GITHUB
+                  </Button>
+                </div>
+              </div>
+
+              {/* Right 3D Interactive Wall Column - Expanded to 80% screen space! */}
+              <div className="lg:w-[80%] w-full flex-grow max-w-5xl lg:max-w-none">
+                <MindCareShowcase />
+              </div>
+            </div>
+
+            {/* Subtle Divider for other featured works */}
+            <div className="relative py-8 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-border/40"></div>
+              </div>
+              <div className="relative px-4 bg-background text-xs uppercase tracking-widest text-muted-foreground/60 font-mono">
+                Other Featured Accomplishments
+              </div>
+            </div>
+
+            {/* Grid of secondary featured items */}
             <div className="grid md:grid-cols-2 gap-8">
               {featuredProjects.map((project, index) => renderProjectCard(project, index))}
             </div>

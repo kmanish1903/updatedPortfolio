@@ -11,7 +11,12 @@ const Hero = () => {
   const handleConnectWithMe = () => {
     const element = document.querySelector('#contact');
     if (element) {
-      element.scrollIntoView({
+      const offset = 80; // 64px header height + 16px buffer
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
         behavior: 'smooth'
       });
     }
@@ -22,7 +27,7 @@ const Hero = () => {
   };
   
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background pt-20 lg:pt-24">
+    <section id="about" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background pt-20 lg:pt-24">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
