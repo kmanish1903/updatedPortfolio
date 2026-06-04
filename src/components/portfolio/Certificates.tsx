@@ -247,7 +247,7 @@ const Certificates = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center mb-6 animate-fade-in-up">
+        <div className="text-center mb-6 reveal">
           <p className="text-xs uppercase tracking-widest text-primary font-bold mb-2">My Achievements</p>
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
             Certificates
@@ -258,7 +258,7 @@ const Certificates = () => {
         </div>
 
         {/* 3D coverflow Carousel Frame */}
-        <div className="relative w-full overflow-hidden py-4 flex flex-col items-center justify-center min-h-[350px]">
+        <div className="relative w-full overflow-hidden py-4 flex flex-col items-center justify-center min-h-[350px] reveal-scale" style={{ transitionDelay: '150ms' }}>
           
           {/* Left / Right edge fade gradients */}
           <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background via-background/20 to-transparent z-30 pointer-events-none" />

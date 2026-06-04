@@ -92,7 +92,7 @@ const Contact = () => {
   return (
     <section id="contact" className="py-10 bg-background scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-6 animate-fade-in-up">
+        <div className="text-center mb-6 reveal">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
             Let's Connect
           </h2>
@@ -104,7 +104,7 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {/* Contact Information */}
-          <div className="space-y-4 animate-fade-in-up">
+          <div className="space-y-4 reveal-left">
             <div>
               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Get in Touch</h3>
               <p className="text-sm text-muted-foreground leading-relaxed mb-2">
@@ -175,8 +175,8 @@ const Contact = () => {
           </div>
 
           {/* Contact Form with 3D effect */}
-          <TiltCard tiltAmount={3} glareEnabled={true}>
-            <Card className="gradient-card border-0 shadow-custom animate-scale-in">
+          <TiltCard tiltAmount={3} glareEnabled={true} className="reveal-right" style={{ transitionDelay: '150ms' }}>
+            <Card className="gradient-card border-0 shadow-custom">
               <CardHeader className="py-4">
                 <CardTitle className="text-xl font-bold text-foreground">
                   Send a Message

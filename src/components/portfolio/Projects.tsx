@@ -489,7 +489,7 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 gradient-subtle scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-fade-in-up">
+        <div className="text-center mb-16 reveal">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
             My Work
           </h2>
@@ -510,7 +510,7 @@ const Projects = () => {
 
           <TabsContent value="featured" className="space-y-12">
             {/* MindCare AI Ultimate 3D Showcase Block */}
-            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 animate-fade-in pt-4">
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 reveal pt-4">
               {/* Left Details Block - Downsized to give more area to screenshots */}
               <div className="lg:w-[20%] w-full space-y-6 text-left flex-shrink-0">
                 {/* MY WORK Badge strictly matching mockup! */}

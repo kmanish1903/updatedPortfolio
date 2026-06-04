@@ -36,7 +36,7 @@ const About = () => {
 
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Shimmer */}
-        <div className="text-center mb-16 animate-fade-in-up">
+        <div className="text-center mb-16 reveal">
           <div className="inline-flex items-center gap-2 mb-4">
             <Code2 className="w-8 h-8 text-primary animate-pulse-glow" />
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-text-shimmer">
@@ -52,7 +52,7 @@ const About = () => {
         {/* Creative About Story Cards */}
         <div className="grid md:grid-cols-2 gap-6 mb-16 max-w-5xl mx-auto">
           {/* Card 1 - Academic Journey */}
-          <Card className="group gradient-card border-border/50 shadow-lg hover:shadow-glow transition-all duration-500 animate-slide-in-left backdrop-blur-sm bg-card/80">
+          <Card className="group gradient-card border-border/50 shadow-lg hover:shadow-glow transition-all duration-500 reveal-left backdrop-blur-sm bg-card/80">
             <CardContent className="p-6 sm:p-8">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
@@ -73,8 +73,8 @@ const About = () => {
           </Card>
 
           {/* Card 2 - Professional Vision */}
-          <Card className="group gradient-card border-border/50 shadow-lg hover:shadow-glow transition-all duration-500 animate-slide-in-right backdrop-blur-sm bg-card/80" style={{
-          animationDelay: '200ms'
+          <Card className="group gradient-card border-border/50 shadow-lg hover:shadow-glow transition-all duration-500 reveal-right backdrop-blur-sm bg-card/80" style={{
+          transitionDelay: '150ms'
         }}>
             <CardContent className="p-6 sm:p-8">
               <div className="flex items-start gap-4">
@@ -93,8 +93,8 @@ const About = () => {
         </div>
 
         {/* Console Log Style Quote */}
-        <div className="max-w-3xl mx-auto mb-16 animate-scale-in" style={{
-        animationDelay: '400ms'
+        <div className="max-w-3xl mx-auto mb-16 reveal-scale" style={{
+        transitionDelay: '300ms'
       }}>
           <div className="relative p-6 sm:p-8 rounded-xl border border-primary/30 bg-card/50 backdrop-blur-sm shadow-glow">
             <div className="absolute -top-3 left-6 px-3 py-1 bg-primary/20 border border-primary/30 rounded-md text-xs font-mono text-primary">
@@ -113,8 +113,8 @@ const About = () => {
 
         {/* Animated Highlights Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
-          {highlights.map((item, index) => <Card key={index} className="group gradient-card border-border/50 shadow-md hover:shadow-glow transition-all duration-500 animate-bounce-in backdrop-blur-sm bg-card/80 hover:scale-105" style={{
-          animationDelay: `${600 + index * 150}ms`
+          {highlights.map((item, index) => <Card key={index} className="group gradient-card border-border/50 shadow-md hover:shadow-glow transition-all duration-500 reveal-scale backdrop-blur-sm bg-card/80 hover:scale-105" style={{
+          transitionDelay: `${400 + index * 100}ms`
         }}>
               <CardContent className="p-6">
                 <div className="flex flex-col items-center text-center space-y-3">

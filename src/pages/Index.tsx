@@ -27,6 +27,38 @@ const Index = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (showSplash) return;
+
+    const timer = setTimeout(() => {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -10% 0px', // Trigger reveal slightly before it is fully in view
+        threshold: 0.05,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-active');
+            observer.unobserve(entry.target); // Trigger only once
+          }
+        });
+      }, observerOptions);
+
+      const revealElements = document.querySelectorAll(
+        '.reveal, .reveal-left, .reveal-right, .reveal-scale'
+      );
+      revealElements.forEach((el) => observer.observe(el));
+
+      return () => {
+        observer.disconnect();
+      };
+    }, 150); // Short delay to ensure browser paints DOM
+
+    return () => clearTimeout(timer);
+  }, [showSplash]);
+
   const handleSplashComplete = () => {
     setShowSplash(false);
     sessionStorage.setItem('hasVisited', 'true');
@@ -60,6 +92,7 @@ const Index = () => {
 
           <ScrollProgress />
           <Header />
+          
           <main>
             <Hero />
             <Stats />

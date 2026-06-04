@@ -57,7 +57,7 @@ const Skills = () => {
       <div className="absolute left-0 bottom-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-6 animate-fade-in-up">
+        <div className="text-center mb-6 reveal">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
             Skills
           </h2>
@@ -92,12 +92,12 @@ const Skills = () => {
         {/* 3D Sphere alongside Grid */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-6 max-w-6xl mx-auto">
           {/* 3D Spinning Skill Constellation Sphere */}
-          <div className="flex-1 w-full flex items-center justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <div className="flex-1 w-full flex items-center justify-center reveal-left">
             <SkillSphere />
           </div>
           
           {/* Skills Grid Card with 3D Tilt */}
-          <div className="flex-1 w-full max-w-xl lg:max-w-none">
+          <div className="flex-1 w-full max-w-xl lg:max-w-none reveal-right" style={{ transitionDelay: '150ms' }}>
             <TiltCard tiltAmount={4} glareEnabled={true}>
               <Card className="gradient-card border-0 shadow-custom bg-card/60 backdrop-blur-md">
                 <CardContent className="p-4">
