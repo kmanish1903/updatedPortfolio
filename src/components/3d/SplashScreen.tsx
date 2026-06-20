@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { playClick, playHover } from '@/lib/audio';
 import { Rocket, ChevronRight } from 'lucide-react';
+import splashBg from '@/assets/splash-background.jpg';
+import splashBgMobile from '@/assets/splash-background-mobile.jpg';
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -86,6 +88,17 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
         }
       `}</style>
 
+      {/* Immersive background image for the gate screen - fades in when showGate is true */}
+      <div 
+        className={`
+          absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out pointer-events-none
+          ${showGate ? 'opacity-40' : 'opacity-0'}
+        `}
+        style={{
+          backgroundImage: `url(${isMobile ? splashBgMobile : splashBg})`,
+        }}
+      />
+ 
       {/* Background neon ambient mesh highlights */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Left Side Cyan Mesh */}
@@ -136,7 +149,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
           <div className="flex flex-col items-center justify-center w-full animate-scale-in">
             
             {/* 1. Welcome Tagline Header */}
-            <div className="flex items-center justify-center gap-4 w-full max-w-md mb-6 animate-fade-in" style={{ animationDelay: '100ms' }}>
+            <div className="flex items-center justify-center gap-4 w-full max-w-md mb-4 sm:mb-6 animate-fade-in" style={{ animationDelay: '100ms' }}>
               <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/20" />
               <span className="text-[10px] sm:text-xs font-mono font-black text-white/90 tracking-[0.35em] uppercase whitespace-nowrap pl-1 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">
                 WELCOME TO MY PORTFOLIO
@@ -145,17 +158,17 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
             </div>
 
             {/* 2. Full Name Typography */}
-            <div className="space-y-1 mb-4">
-              <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-[0.12em] uppercase select-none leading-none font-mono">
+            <div className="space-y-1 mb-2 sm:mb-4">
+              <h1 className="text-3xl xs:text-5xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-[0.12em] uppercase select-none leading-none font-mono">
                 KANYABOYINA
               </h1>
-              <h1 className="text-5xl xs:text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-[0.15em] uppercase select-none leading-none bg-gradient-to-r from-cyan-400 via-primary-hover to-purple-500 bg-clip-text text-transparent filter drop-shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+              <h1 className="text-4xl xs:text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-[0.15em] uppercase select-none leading-none bg-gradient-to-r from-cyan-400 via-primary-hover to-purple-500 bg-clip-text text-transparent filter drop-shadow-[0_0_25px_rgba(59,130,246,0.3)]">
                 MANISH
               </h1>
             </div>
 
             {/* 3. Developer Tagline Framer Representing •━━━━━━• */}
-            <div className="flex items-center justify-center gap-3 w-full max-w-md my-4 animate-fade-in" style={{ animationDelay: '200ms' }}>
+            <div className="flex items-center justify-center gap-3 w-full max-w-md my-3 sm:my-4 animate-fade-in" style={{ animationDelay: '200ms' }}>
               <div className="h-0.5 w-10 sm:w-16 bg-gradient-to-r from-transparent to-cyan-500/40 relative flex items-center justify-end">
                 <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 absolute -right-0.5 shadow-[0_0_8px_rgba(0,240,255,0.8)]" />
               </div>
@@ -168,7 +181,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
             </div>
 
             {/* 4. Skills Triad Separated by Pipes */}
-            <div className="flex items-center gap-2.5 sm:gap-4 justify-center text-[9px] sm:text-xs font-mono font-bold text-white/80 tracking-widest uppercase mb-10 animate-fade-in" style={{ animationDelay: '300ms' }}>
+            <div className="flex items-center gap-2.5 sm:gap-4 justify-center text-[9px] sm:text-xs font-mono font-bold text-white/80 tracking-widest uppercase mb-6 sm:mb-10 animate-fade-in" style={{ animationDelay: '300ms' }}>
               <span>AI/ML ENTHUSIAST</span>
               <span className="text-white/20 font-light">|</span>
               <span>PROBLEM SOLVER</span>
@@ -190,7 +203,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
             </div>
 
             {/* 6. Discover explore experience tagline */}
-            <p className="text-[9px] sm:text-[10px] font-mono font-bold text-white/60 tracking-[0.3em] uppercase mt-12 animate-fade-in" style={{ animationDelay: '500ms' }}>
+            <p className="text-[9px] sm:text-[10px] font-mono font-bold text-white/60 tracking-[0.3em] uppercase mt-6 sm:mt-12 animate-fade-in" style={{ animationDelay: '500ms' }}>
               DISCOVER  •  EXPLORE  •  EXPERIENCE
             </p>
           </div>

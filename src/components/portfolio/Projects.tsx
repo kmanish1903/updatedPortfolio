@@ -500,12 +500,12 @@ const Projects = () => {
         </div>
 
         <Tabs defaultValue="featured" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-8">
-            <TabsTrigger value="featured">Featured</TabsTrigger>
-            <TabsTrigger value="react">React</TabsTrigger>
-            <TabsTrigger value="dynamic">Dynamic</TabsTrigger>
-            <TabsTrigger value="static">Static</TabsTrigger>
-            <TabsTrigger value="responsive">Responsive</TabsTrigger>
+          <TabsList className="flex md:grid overflow-x-auto md:overflow-x-visible whitespace-nowrap no-scrollbar justify-start md:justify-center w-full grid-cols-5 mb-8 p-1 bg-muted rounded-lg">
+            <TabsTrigger value="featured" className="flex-shrink-0 md:flex-shrink">Featured</TabsTrigger>
+            <TabsTrigger value="react" className="flex-shrink-0 md:flex-shrink">React</TabsTrigger>
+            <TabsTrigger value="dynamic" className="flex-shrink-0 md:flex-shrink">Dynamic</TabsTrigger>
+            <TabsTrigger value="static" className="flex-shrink-0 md:flex-shrink">Static</TabsTrigger>
+            <TabsTrigger value="responsive" className="flex-shrink-0 md:flex-shrink">Responsive</TabsTrigger>
           </TabsList>
 
           <TabsContent value="featured" className="space-y-12">

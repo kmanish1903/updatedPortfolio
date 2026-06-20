@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Award, ExternalLink, ShieldCheck, ChevronLeft, ChevronRight, Mouse } from 'lucide-react';
 import { playClick, playHover } from '@/lib/audio';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Import certificate images
 import certificate1 from '@/assets/certificate-1.png';
@@ -97,6 +98,7 @@ const certificates: Certificate[] = [
 ];
 
 const Certificates = () => {
+  const isMobile = useIsMobile();
   const [activeIndex, setActiveIndex] = useState<number>(3); // Balanced middle item on load
   const dragStartX = useRef<number>(0);
   const isDragging = useRef<boolean>(false);
@@ -198,18 +200,18 @@ const Certificates = () => {
     }
 
     // Mathematical 3D cylinder projection curve
-    const angle = offset * 28; // 28 degrees separation
-    const radius = 300; // Cylindrical radius
+    const angle = offset * (isMobile ? 22 : 28); // narrower angle on mobile
+    const radius = isMobile ? 140 : 300; // smaller radius on mobile to fit screen
     const radian = (angle * Math.PI) / 180;
     
     const translateX = Math.sin(radian) * radius;
-    const translateZ = (Math.cos(radian) - 1) * radius + (offset === 0 ? 45 : -90);
+    const translateZ = (Math.cos(radian) - 1) * radius + (offset === 0 ? (isMobile ? 20 : 45) : (isMobile ? -60 : -90));
     
     // Rotate cards inwards to face the viewer
     const rotateY = -angle;
     
     // Scaling
-    const scale = offset === 0 ? 1.15 : 0.85;
+    const scale = offset === 0 ? (isMobile ? 1.0 : 1.15) : (isMobile ? 0.75 : 0.85);
     
     // Opacity decay
     const opacity = offset === 0 ? 1 : absOffset === 1 ? 0.8 : absOffset === 2 ? 0.45 : 0.15;
@@ -266,7 +268,7 @@ const Certificates = () => {
 
           {/* Perspective viewport wrapper */}
           <div 
-            className="relative w-full max-w-4xl h-[230px] perspective-[1000px] transform-style-3d cursor-grab active:cursor-grabbing"
+            className="relative w-full max-w-4xl h-[190px] sm:h-[230px] perspective-[1000px] transform-style-3d cursor-grab active:cursor-grabbing"
             onMouseDown={(e) => handleDragStart(e.clientX)}
             onMouseMove={(e) => handleDragMove(e.clientX)}
             onMouseUp={handleDragEnd}
@@ -289,7 +291,7 @@ const Certificates = () => {
                       resetAutoplay();
                     }
                   }}
-                  className="absolute rounded-xl overflow-hidden bg-card/60 backdrop-blur-md w-[280px] h-[210px] transform-style-3d group"
+                  className="absolute rounded-xl overflow-hidden bg-card/60 backdrop-blur-md w-[230px] h-[172px] sm:w-[280px] sm:h-[210px] transform-style-3d group"
                 >
                   {/* Certificate Screenshot Image Face */}
                   <img 

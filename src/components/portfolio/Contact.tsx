@@ -134,14 +134,14 @@ const Contact = () => {
                       {contact.href ? (
                         <a 
                           href={contact.href}
-                          className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-smooth"
+                          className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-smooth break-all sm:break-normal block"
                           target={contact.href.startsWith('http') ? '_blank' : undefined}
                           rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                         >
                           {contact.value}
                         </a>
                       ) : (
-                        <p className="text-xs sm:text-sm text-muted-foreground">{contact.value}</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground break-all sm:break-normal">{contact.value}</p>
                       )}
                     </div>
                   </div>

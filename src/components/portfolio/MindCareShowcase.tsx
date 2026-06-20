@@ -6,6 +6,7 @@ import mindcareAnalytics from '@/assets/mindcare-analytics.jpg';
 import mindcareSupport from '@/assets/mindcare-support.jpg';
 import { playHover, playClick } from '@/lib/audio';
 import { Layers } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const MindCareShowcase = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,6 +14,7 @@ const MindCareShowcase = () => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedName, setSelectedName] = useState<string | null>(null);
+  const isMobile = useIsMobile();
 
   // Global mousemove tracker: even a tiny mouse movement anywhere on the screen tilts and skews the showcase!
   useEffect(() => {
@@ -194,6 +196,74 @@ const MindCareShowcase = () => {
     },
   ];
 
+  const displayedCards = isMobile
+    ? cards
+        .filter(c => [1, 2, 3, 6, 7].includes(c.id))
+        .map(c => {
+          if (c.id === 1) {
+            return {
+              ...c,
+              style: {
+                ...c.style,
+                width: '58%',
+                maxWidth: '240px',
+                top: '50%',
+                left: '50%',
+              }
+            };
+          }
+          if (c.id === 2) {
+            return {
+              ...c,
+              style: {
+                ...c.style,
+                width: '32%',
+                maxWidth: '120px',
+                top: '20%',
+                left: '22%',
+              }
+            };
+          }
+          if (c.id === 3) {
+            return {
+              ...c,
+              style: {
+                ...c.style,
+                width: '32%',
+                maxWidth: '120px',
+                top: '20%',
+                left: '78%',
+              }
+            };
+          }
+          if (c.id === 6) {
+            return {
+              ...c,
+              style: {
+                ...c.style,
+                width: '32%',
+                maxWidth: '120px',
+                top: '80%',
+                left: '22%',
+              }
+            };
+          }
+          if (c.id === 7) {
+            return {
+              ...c,
+              style: {
+                ...c.style,
+                width: '32%',
+                maxWidth: '120px',
+                top: '80%',
+                left: '78%',
+              }
+            };
+          }
+          return c;
+        })
+    : cards;
+
   const getCardTransformStyle = (card: typeof cards[0]) => {
     const { parallaxFactor, baseRotateX, baseRotateY, baseRotateZ, baseTranslateZ, zIndex } = card.style;
     
@@ -260,23 +330,23 @@ const MindCareShowcase = () => {
           <ellipse 
             cx="50%" 
             cy="50%" 
-            rx="36%" 
-            ry="33%" 
+            rx={isMobile ? "30%" : "36%"} 
+            ry={isMobile ? "30%" : "33%"} 
             className="stroke-primary/20 stroke-[1.5] fill-none" 
             style={{ strokeDasharray: '6, 6' }}
           />
           {/* Radial lines connecting center card to surrounding orbiting panels */}
-          <line x1="50%" y1="50%" x2="16%" y2="15%" className="stroke-cyan-500/20 stroke-1" />
-          <line x1="50%" y1="50%" x2="50%" y2="12%" className="stroke-purple-500/20 stroke-1" />
-          <line x1="50%" y1="50%" x2="84%" y2="16%" className="stroke-pink-500/20 stroke-1" />
-          <line x1="50%" y1="50%" x2="12%" y2="50%" className="stroke-blue-500/20 stroke-1" />
-          <line x1="50%" y1="50%" x2="88%" y2="50%" className="stroke-purple-500/20 stroke-1" />
-          <line x1="50%" y1="50%" x2="18%" y2="85%" className="stroke-cyan-500/20 stroke-1" />
-          <line x1="50%" y1="50%" x2="82%" y2="84%" className="stroke-purple-500/20 stroke-1" />
+          <line x1="50%" y1="50%" x2={isMobile ? "22%" : "16%"} y2={isMobile ? "20%" : "15%"} className="stroke-cyan-500/20 stroke-1" />
+          {!isMobile && <line x1="50%" y1="50%" x2="50%" y2="12%" className="stroke-purple-500/20 stroke-1" />}
+          <line x1="50%" y1="50%" x2={isMobile ? "78%" : "84%"} y2={isMobile ? "20%" : "16%"} className="stroke-pink-500/20 stroke-1" />
+          {!isMobile && <line x1="50%" y1="50%" x2="12%" y2="50%" className="stroke-blue-500/20 stroke-1" />}
+          {!isMobile && <line x1="50%" y1="50%" x2="88%" y2="50%" className="stroke-purple-500/20 stroke-1" />}
+          <line x1="50%" y1="50%" x2={isMobile ? "22%" : "18%"} y2={isMobile ? "80%" : "85%"} className="stroke-cyan-500/20 stroke-1" />
+          <line x1="50%" y1="50%" x2={isMobile ? "78%" : "82%"} y2={isMobile ? "80%" : "84%"} className="stroke-purple-500/20 stroke-1" />
         </svg>
         
         {/* 3D Floating Scattered panels */}
-        {cards.map((card) => {
+        {displayedCards.map((card) => {
           const positionStyles = { top: card.style.top, left: card.style.left };
 
           return (
