@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { playClick, playHover } from '@/lib/audio';
 import { Rocket, ChevronRight } from 'lucide-react';
-import splashBg from '@/assets/splash-background.jpg';
-import splashBgMobile from '@/assets/splash-background-mobile.jpg';
-
 interface SplashScreenProps {
   onComplete: () => void;
+  onTransitionStart: () => void;
+  onGateShow: () => void;
 }
 
-const SplashScreen = ({ onComplete }: SplashScreenProps) => {
+const SplashScreen = ({ onComplete, onTransitionStart, onGateShow }: SplashScreenProps) => {
   const isMobile = useIsMobile();
   const [isExiting, setIsExiting] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -23,6 +22,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
           clearInterval(interval);
           setTimeout(() => {
             setShowGate(true);
+            onGateShow();
           }, 300); // Breathe gap
           return 100;
         }
@@ -33,7 +33,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [onGateShow]);
 
   const handleEnterPortfolio = async () => {
     playClick();
@@ -55,17 +55,19 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     }
 
     // Start exit transition
+    onTransitionStart();
     setIsExiting(true);
     setTimeout(() => {
       onComplete();
-    }, 600);
+    }, 2200); // 2.2 seconds total transition delay to let background zoom & fog load
   };
 
   return (
     <div 
       className={`
-        fixed inset-0 z-[100] bg-[#090d16] flex flex-col items-center justify-center select-none overflow-hidden
-        transition-all duration-700 ease-out
+        fixed inset-0 z-[100] flex flex-col items-center justify-center select-none overflow-hidden
+        transition-all duration-1000 ease-in-out
+        ${showGate ? 'bg-transparent' : 'bg-[#090d16]'}
         ${isExiting ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'}
       `}
     >
@@ -88,16 +90,6 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
         }
       `}</style>
 
-      {/* Immersive background image for the gate screen - fades in when showGate is true */}
-      <div 
-        className={`
-          absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out pointer-events-none
-          ${showGate ? 'opacity-40' : 'opacity-0'}
-        `}
-        style={{
-          backgroundImage: `url(${isMobile ? splashBgMobile : splashBg})`,
-        }}
-      />
  
       {/* Background neon ambient mesh highlights */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

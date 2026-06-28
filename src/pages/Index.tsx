@@ -1,7 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import Header from '@/components/portfolio/Header';
 import Hero from '@/components/portfolio/Hero';
-import Stats from '@/components/portfolio/Stats';
 import Projects from '@/components/portfolio/Projects';
 import Skills from '@/components/portfolio/Skills';
 import Certificates from '@/components/portfolio/Certificates';
@@ -9,6 +8,7 @@ import Contact from '@/components/portfolio/Contact';
 import ScrollProgress from '@/components/portfolio/ScrollProgress';
 import { useIsMobile } from '@/hooks/use-mobile';
 import InteractiveCursor from '@/components/3d/InteractiveCursor';
+import CinematicBackground from '@/components/3d/CinematicBackground';
 
 const SplashScreen = lazy(() => import('@/components/3d/SplashScreen'));
 const ParticlesBackground = lazy(() => import('@/components/3d/ParticlesBackground'));
@@ -16,6 +16,9 @@ const ParticlesBackground = lazy(() => import('@/components/3d/ParticlesBackgrou
 const Index = () => {
   const [showSplash, setShowSplash] = useState(true);
   const [hasVisited, setHasVisited] = useState(false);
+  const [portfolioState, setPortfolioState] = useState<'loading' | 'gateway' | 'transitioning' | 'active'>('loading');
+  const [activeSection, setActiveSection] = useState<'about' | 'projects' | 'skills' | 'certificates' | 'contact'>('about');
+  const [scrollY, setScrollY] = useState(0);
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -24,8 +27,36 @@ const Index = () => {
     if (visited) {
       setShowSplash(false);
       setHasVisited(true);
+      setPortfolioState('active');
     }
   }, []);
+
+  useEffect(() => {
+    if (portfolioState !== 'active') return;
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+
+      // Detect active section based on half-viewport threshold
+      const sections = ['about', 'projects', 'skills', 'certificates', 'contact'];
+      const scrollPosition = window.scrollY + window.innerHeight * 0.45;
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(sectionId as any);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [portfolioState]);
 
   useEffect(() => {
     if (showSplash) return;
@@ -63,12 +94,29 @@ const Index = () => {
     setShowSplash(false);
     sessionStorage.setItem('hasVisited', 'true');
     setHasVisited(true);
+    setPortfolioState('active');
+  };
+
+  const handleTransitionStart = () => {
+    setPortfolioState('transitioning');
+  };
+
+  const handleGateShow = () => {
+    setPortfolioState('gateway');
   };
 
   return (
     <div className="min-h-screen bg-[#090d16]">
       {/* Global Interactive Cursor Particle Trail */}
       <InteractiveCursor />
+
+      {/* Global Cinematic Mountain Landscape Background */}
+      <CinematicBackground 
+        stage={portfolioState} 
+        activeSection={activeSection} 
+        scrollY={scrollY} 
+        isMobile={isMobile} 
+      />
 
       {showSplash ? (
         <Suspense fallback={
@@ -79,7 +127,11 @@ const Index = () => {
             </div>
           </div>
         }>
-          <SplashScreen onComplete={handleSplashComplete} />
+          <SplashScreen 
+            onComplete={handleSplashComplete} 
+            onTransitionStart={handleTransitionStart}
+            onGateShow={handleGateShow}
+          />
         </Suspense>
       ) : (
         <>
@@ -93,9 +145,8 @@ const Index = () => {
           <ScrollProgress />
           <Header />
           
-          <main>
+          <main className="relative z-10">
             <Hero />
-            <Stats />
             <Projects />
             <Skills />
             <Certificates />

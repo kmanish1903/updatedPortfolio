@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { ExternalLink, Github, Sparkles, Code2, Layers } from 'lucide-react';
+import { ExternalLink, Github, Sparkles, Code2, Layers, ArrowLeft } from 'lucide-react';
 import genvitexImage from '@/assets/genvitex-project.jpg';
 import mernImage from '@/assets/mern-crud-project.jpg';
 import TiltCard from '@/components/3d/TiltCard';
@@ -23,6 +23,7 @@ import coinTossImg from '@/assets/react-projects/coin-toss.png';
 import statesCapitalsImg from '@/assets/react-projects/states-capitals.png';
 
 const Projects = () => {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   // React practice projects with screenshots and skill tags
   const reactProjects = [
     {
@@ -487,166 +488,235 @@ const Projects = () => {
   );
 
   return (
-    <section id="projects" className="py-20 gradient-subtle scroll-mt-20">
+    <section id="projects" className="py-20 bg-transparent scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 reveal">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             My Work
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
             A showcase of my technical skills and problem-solving abilities through 
             real-world applications and course projects.
           </p>
         </div>
 
-        <Tabs defaultValue="featured" className="w-full">
-          <TabsList className="flex md:grid overflow-x-auto md:overflow-x-visible whitespace-nowrap no-scrollbar justify-start md:justify-center w-full grid-cols-5 mb-8 p-1 bg-muted rounded-lg">
-            <TabsTrigger value="featured" className="flex-shrink-0 md:flex-shrink">Featured</TabsTrigger>
-            <TabsTrigger value="react" className="flex-shrink-0 md:flex-shrink">React</TabsTrigger>
-            <TabsTrigger value="dynamic" className="flex-shrink-0 md:flex-shrink">Dynamic</TabsTrigger>
-            <TabsTrigger value="static" className="flex-shrink-0 md:flex-shrink">Static</TabsTrigger>
-            <TabsTrigger value="responsive" className="flex-shrink-0 md:flex-shrink">Responsive</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="featured" className="space-y-12">
-            {/* MindCare AI Ultimate 3D Showcase Block */}
-            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 reveal pt-4">
-              {/* Left Details Block - Downsized to give more area to screenshots */}
-              <div className="lg:w-[20%] w-full space-y-6 text-left flex-shrink-0">
-                {/* MY WORK Badge strictly matching mockup! */}
-                <div className="flex items-center gap-2 animate-fade-in pl-1">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_8px_rgba(0,240,255,0.8)]"></span>
-                  </span>
-                  <span className="text-[10px] font-bold font-mono tracking-[0.35em] text-foreground/80 uppercase">
-                    MY WORK
-                  </span>
+        {activeCategory === null ? (
+          /* 4 Category Selection Buttons/Cards */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto pt-6 animate-scale-in">
+            {/* Card 1: Featured */}
+            <div 
+              onClick={() => setActiveCategory('featured')}
+              className="group relative p-6 rounded-2xl glass-card border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
+            >
+              <div>
+                <div className="p-3 bg-primary/10 rounded-xl text-primary w-fit mb-4 group-hover:scale-110 transition-transform">
+                  <Sparkles className="h-6 w-6" />
                 </div>
-
-                {/* Typography Heading strictly matching mockup style! */}
-                <div className="space-y-1">
-                  <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight uppercase select-none">
-                    MindCare <span className="bg-gradient-to-r from-cyan-400 via-primary-hover to-purple-500 bg-clip-text text-transparent filter drop-shadow-[0_0_12px_rgba(59,130,246,0.3)]">Ai</span>
-                  </h3>
-                  <p className="text-[9px] sm:text-[10px] font-bold font-mono tracking-[0.2em] text-primary/90 uppercase pl-0.5 animate-pulse">
-                    AI MENTAL WELLNESS
-                  </p>
-                </div>
-
-                {/* Short Paragraph Description */}
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed pl-0.5">
-                  Your AI-powered companion for mental wellness, mood tracking, goals, insights, and support.
-                </p>
-
-                {/* Primary Action Buttons strictly matching mockup styles! */}
-                <div className="flex flex-col gap-3.5 pt-2 max-w-[260px]">
-                  <Button 
-                    size="lg" 
-                    className="gradient-hero text-white shadow-glow interactive-button w-full h-11 px-8 text-xs font-bold font-mono border border-primary/20 rounded-full"
-                    onClick={() => window.open('https://calm-mind-builder.vercel.app/', '_blank')}
-                  >
-                    <ExternalLink className="mr-2.5 h-4 w-4" />
-                    LIVE DEMO
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-white/10 hover:border-primary text-foreground hover:text-white bg-transparent interactive-button w-full h-11 px-8 text-xs font-bold font-mono rounded-full"
-                    onClick={() => window.open('https://github.com/kmanish1903', '_blank')}
-                  >
-                    <Github className="mr-2.5 h-4 w-4" />
-                    GITHUB
-                  </Button>
-                </div>
+                <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors mb-2">Featured Projects</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">Full-stack web applications and AI-powered mental wellness platforms.</p>
               </div>
-
-              {/* Right 3D Interactive Wall Column - Expanded to 80% screen space! */}
-              <div className="lg:w-[80%] w-full flex-grow max-w-5xl lg:max-w-none">
-                <MindCareShowcase />
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-[10px] font-bold font-mono text-cyan-400 tracking-wider">3 PROJECTS</span>
+                <span className="text-xs text-cyan-400 font-bold group-hover:translate-x-1.5 transition-transform">EXPLORE →</span>
               </div>
             </div>
 
-            {/* Subtle Divider for other featured works */}
-            <div className="relative py-8 flex items-center justify-center">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-border/40"></div>
+            {/* Card 2: ReactJS */}
+            <div 
+              onClick={() => setActiveCategory('react')}
+              className="group relative p-6 rounded-2xl glass-card border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
+            >
+              <div>
+                <div className="p-3 bg-cyan-500/10 rounded-xl text-cyan-400 w-fit mb-4 group-hover:scale-110 transition-transform">
+                  <Code2 className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors mb-2">React.js Apps</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">Interactive client-side web applications and UI state management widgets.</p>
               </div>
-              <div className="relative px-4 bg-background text-xs uppercase tracking-widest text-muted-foreground/60 font-mono">
-                Other Featured Accomplishments
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-[10px] font-bold font-mono text-cyan-400 tracking-wider">12 PROJECTS</span>
+                <span className="text-xs text-cyan-400 font-bold group-hover:translate-x-1.5 transition-transform">EXPLORE →</span>
               </div>
             </div>
 
-            {/* Grid of secondary featured items */}
-            <div className="grid md:grid-cols-2 gap-8">
-              {featuredProjects.map((project, index) => renderProjectCard(project, index))}
+            {/* Card 3: Dynamic JS */}
+            <div 
+              onClick={() => setActiveCategory('dynamic')}
+              className="group relative p-6 rounded-2xl glass-card border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
+            >
+              <div>
+                <div className="p-3 bg-purple-500/10 rounded-xl text-purple-400 w-fit mb-4 group-hover:scale-110 transition-transform">
+                  <Layers className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-white group-hover:text-purple-400 transition-colors mb-2">Dynamic Web Apps</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">Interactive JavaScript games, controllers, timers, and array sandboxes.</p>
+              </div>
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-[10px] font-bold font-mono text-cyan-400 tracking-wider">10 PROJECTS</span>
+                <span className="text-xs text-cyan-400 font-bold group-hover:translate-x-1.5 transition-transform">EXPLORE →</span>
+              </div>
             </div>
-          </TabsContent>
 
-          <TabsContent value="react">
-            {/* Stats Header */}
-            <div className="mb-8 glass-card rounded-2xl p-6 border border-primary/20">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                {/* Left: Title & Description */}
-                <div className="text-center md:text-left">
-                  <div className="flex items-center gap-2 justify-center md:justify-start mb-2">
-                    <Sparkles className="h-5 w-5 text-primary" />
-                    <h3 className="text-xl font-bold text-foreground">React.js Projects</h3>
+            {/* Card 4: Static */}
+            <div 
+              onClick={() => setActiveCategory('static')}
+              className="group relative p-6 rounded-2xl glass-card border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
+            >
+              <div>
+                <div className="p-3 bg-amber-500/10 rounded-xl text-amber-400 w-fit mb-4 group-hover:scale-110 transition-transform">
+                  <Code2 className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors mb-2">Static Templates</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">HTML5/CSS3 templates demonstrating semantic structures and grid layouts.</p>
+              </div>
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-[10px] font-bold font-mono text-cyan-400 tracking-wider">1 PROJECT</span>
+                <span className="text-xs text-cyan-400 font-bold group-hover:translate-x-1.5 transition-transform">EXPLORE →</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="animate-fade-in">
+            {/* Back Button */}
+            <div className="flex justify-start mb-8">
+              <Button 
+                variant="outline" 
+                onClick={() => setActiveCategory(null)}
+                className="border-white/10 hover:border-cyan-400 text-white hover:text-cyan-400 bg-transparent rounded-full px-6 h-10 text-xs font-bold font-mono tracking-wider transition-all duration-300 hover:-translate-x-1"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                BACK TO CATEGORIES
+              </Button>
+            </div>
+
+            {activeCategory === 'featured' && (
+              <div className="space-y-12">
+                {/* MindCare AI Ultimate 3D Showcase Block */}
+                <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 pt-4">
+                  {/* Left Details Block - Downsized to give more area to screenshots */}
+                  <div className="lg:w-[20%] w-full space-y-6 text-left flex-shrink-0">
+                    {/* MY WORK Badge */}
+                    <div className="flex items-center gap-2 animate-fade-in pl-1">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_8px_rgba(0,240,255,0.8)]"></span>
+                      </span>
+                      <span className="text-[10px] font-bold font-mono tracking-[0.35em] text-foreground/80 uppercase">
+                        MY WORK
+                      </span>
+                    </div>
+
+                    {/* Typography Heading */}
+                    <div className="space-y-1">
+                      <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight uppercase select-none">
+                        MindCare <span className="bg-gradient-to-r from-cyan-400 via-primary-hover to-purple-500 bg-clip-text text-transparent filter drop-shadow-[0_0_12px_rgba(59,130,246,0.3)]">Ai</span>
+                      </h3>
+                      <p className="text-[9px] sm:text-[10px] font-bold font-mono tracking-[0.2em] text-primary/90 uppercase pl-0.5 animate-pulse">
+                        AI MENTAL WELLNESS
+                      </p>
+                    </div>
+
+                    {/* Short Paragraph Description */}
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed pl-0.5">
+                      Your AI-powered companion for mental wellness, mood tracking, goals, insights, and support.
+                    </p>
+
+                    {/* Primary Action Buttons */}
+                    <div className="flex flex-col gap-3.5 pt-2 max-w-[260px]">
+                      <Button 
+                        size="lg" 
+                        className="gradient-hero text-white shadow-glow interactive-button w-full h-11 px-8 text-xs font-bold font-mono border border-primary/20 rounded-full"
+                        onClick={() => window.open('https://calm-mind-builder.vercel.app/', '_blank')}
+                      >
+                        <ExternalLink className="mr-2.5 h-4 w-4" />
+                        LIVE DEMO
+                      </Button>
+                      <Button 
+                        size="lg" 
+                        variant="outline" 
+                        className="border-white/10 hover:border-primary text-foreground hover:text-white bg-transparent interactive-button w-full h-11 px-8 text-xs font-bold font-mono rounded-full"
+                        onClick={() => window.open('https://github.com/kmanish1903', '_blank')}
+                      >
+                        <Github className="mr-2.5 h-4 w-4" />
+                        GITHUB
+                      </Button>
+                    </div>
                   </div>
-                  <p className="text-muted-foreground text-sm">
-                    Interactive applications demonstrating component architecture & state management
-                  </p>
+
+                  {/* Right 3D Interactive Wall Column */}
+                  <div className="lg:w-[80%] w-full flex-grow max-w-5xl lg:max-w-none">
+                    <MindCareShowcase />
+                  </div>
+                </div>
+
+                {/* Subtle Divider for other featured works */}
+                <div className="relative py-8 flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-border/40"></div>
+                  </div>
+                  <div className="relative px-4 bg-background/20 backdrop-blur-sm text-xs uppercase tracking-widest text-muted-foreground/60 font-mono">
+                    Other Featured Accomplishments
+                  </div>
+                </div>
+
+                {/* Grid of secondary featured items */}
+                <div className="grid md:grid-cols-2 gap-8">
+                  {featuredProjects.map((project, index) => renderProjectCard(project, index))}
+                </div>
+              </div>
+            )}
+
+            {activeCategory === 'react' && (
+              <div className="space-y-6">
+                {/* Stats Header */}
+                <div className="mb-8 glass-card rounded-2xl p-6 border border-primary/20">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                    {/* Left: Title & Description */}
+                    <div className="text-center md:text-left">
+                      <div className="flex items-center gap-2 justify-center md:justify-start mb-2">
+                        <Sparkles className="h-5 w-5 text-primary" />
+                        <h3 className="text-xl font-bold text-foreground">React.js Projects</h3>
+                      </div>
+                      <p className="text-muted-foreground text-sm">
+                        Interactive applications demonstrating component architecture & state management
+                      </p>
+                    </div>
+                    
+                    {/* Right: Stats */}
+                    <div className="flex items-center gap-6">
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-primary stats-glow">{reactProjects.length}</div>
+                        <div className="text-xs text-muted-foreground uppercase tracking-wider">Projects</div>
+                      </div>
+                      <div className="w-px h-10 bg-border"></div>
+                      <div className="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
+                        <Code2 className="h-4 w-4 text-primary" />
+                        <span className="text-sm font-medium text-primary">React.js</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 
-                {/* Right: Stats */}
-                <div className="flex items-center gap-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary stats-glow">{reactProjects.length}</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Projects</div>
-                  </div>
-                  <div className="w-px h-10 bg-border"></div>
-                  <div className="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
-                    <Code2 className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium text-primary">React.js</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-accent/10 px-4 py-2 rounded-full">
-                    <Layers className="h-4 w-4 text-accent" />
-                    <span className="text-sm font-medium text-accent-foreground">Components</span>
-                  </div>
+                {/* Projects Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {reactProjects.map((project, index) => renderReactProjectCard(project, index))}
                 </div>
               </div>
-            </div>
-            
-            {/* Projects Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {reactProjects.map((project, index) => renderReactProjectCard(project, index))}
-            </div>
-          </TabsContent>
+            )}
 
-          <TabsContent value="static">
-            <div className="grid md:grid-cols-2 gap-8">
-              {staticProjects.map((project, index) => renderProjectCard(project, index))}
-            </div>
-          </TabsContent>
+            {activeCategory === 'dynamic' && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {dynamicProjects.map((project, index) => renderProjectCard(project, index))}
+              </div>
+            )}
 
-          <TabsContent value="responsive">
-            <div className="grid md:grid-cols-2 gap-8">
-              {responsiveProjects.length > 0 ? (
-                responsiveProjects.map((project, index) => renderProjectCard(project, index))
-              ) : (
-                <div className="col-span-2 text-center py-12">
-                  <p className="text-muted-foreground">Responsive projects coming soon...</p>
-                </div>
-              )}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="dynamic">
-            <div className="grid md:grid-cols-2 gap-8">
-              {dynamicProjects.map((project, index) => renderProjectCard(project, index))}
-            </div>
-          </TabsContent>
-        </Tabs>
+            {activeCategory === 'static' && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {staticProjects.map((project, index) => renderProjectCard(project, index))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

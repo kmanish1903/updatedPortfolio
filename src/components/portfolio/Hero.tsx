@@ -1,4 +1,4 @@
-import { MessageCircle, Download, Github, Linkedin } from 'lucide-react';
+import { MessageCircle, Download, Github, Linkedin, FolderOpen, Layers, Terminal, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTypingEffect } from '@/hooks/useTypingEffect';
 import { lazy, Suspense } from 'react';
@@ -27,87 +27,115 @@ const Hero = () => {
   };
   
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background pt-20 lg:pt-24">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
+    <section id="about" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-transparent pt-24 lg:pt-28 pb-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-          {/* Left Side - Text Content (Always first on mobile and desktop) */}
-          <div className="flex-1 text-center lg:text-left animate-fade-in-up text-accent-foreground">
+          {/* Left Side - Text Content matching reference image layout */}
+          <div className="flex-1 text-center lg:text-left text-accent-foreground max-w-3xl">
             
-            {/* "create • learn • build" Tagline */}
-            <div className="mb-6 flex items-center justify-center lg:justify-start gap-3 text-lg sm:text-xl md:text-2xl font-medium">
-              <span className="tagline-word animate-fade-in" style={{ animationDelay: '0ms' }}>create</span>
-              <span className="text-primary text-2xl animate-pulse">•</span>
-              <span className="tagline-word animate-fade-in" style={{ animationDelay: '200ms' }}>learn</span>
-              <span className="text-primary text-2xl animate-pulse">•</span>
-              <span className="tagline-word animate-fade-in" style={{ animationDelay: '400ms' }}>build</span>
+            {/* ABOUT ME small label */}
+            <div 
+              className="text-[11px] font-bold font-mono text-cyan-400 tracking-[0.3em] uppercase mb-3 select-none filter drop-shadow-[0_0_8px_rgba(34,211,238,0.3)] animate-fade-in-up opacity-0" 
+              style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}
+            >
+              ABOUT ME
             </div>
 
-            {/* Name - Large and Bold */}
-            <h1 className="text-5xl xs:text-6xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">
-              <span className="gradient-text-hero">K. MANISH</span>
+            {/* Custom Heading from reference image */}
+            <h1 
+              className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-5 leading-tight uppercase font-mono animate-fade-in-up opacity-0" 
+              style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
+            >
+              Building <span className="bg-gradient-to-r from-cyan-400 via-primary-hover to-purple-500 bg-clip-text text-transparent filter drop-shadow-[0_0_20px_rgba(59,130,246,0.35)] font-bold">ideas.</span><br />
+              Solving real <span className="bg-gradient-to-r from-cyan-400 via-primary-hover to-purple-500 bg-clip-text text-transparent filter drop-shadow-[0_0_20px_rgba(59,130,246,0.35)] font-bold">problems.</span>
             </h1>
             
-            {/* Typing effect with role */}
-            <div className="text-base sm:text-lg md:text-xl text-muted-foreground mb-4 max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
-              <span>B.Tech CSE (AI & ML) Graduate – 2026</span>
-            </div>
-            
-            <div className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl mx-auto lg:mx-0 flex flex-col sm:flex-row items-center justify-center lg:justify-start text-center lg:text-left gap-1 sm:gap-0">
-              <span className="text-primary font-semibold">
-                {typingText}
-                <span className="animate-pulse">|</span>
-              </span>
-            </div>
-
-            {/* Connection invitation message */}
-            <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-md mx-auto lg:mx-0">
-              Let's build <span className="text-primary font-semibold">scalable</span> and <span className="text-primary font-semibold">impactful</span> web applications.
+            {/* Description paragraph matching reference image */}
+            <p 
+              className="text-sm sm:text-base md:text-lg text-white/80 leading-relaxed mb-6 max-w-2xl text-center lg:text-left animate-fade-in-up opacity-0 whitespace-pre-line" 
+              style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
+            >
+              B.Tech Graduate in Computer Science turning bold ideas into scalable digital products through thoughtful engineering.{"\n"}
+              Driven by innovation, execution, and a commitment to continuous growth.
             </p>
 
-            {/* Available badge */}
-            <div className="flex justify-center lg:justify-start mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 backdrop-blur-sm">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-                </span>
-                <span className="text-sm font-medium text-primary">Open to Work</span>
-              </div>
+            {/* Typing roles badge */}
+            <div 
+              className="text-xs sm:text-sm text-cyan-400 font-semibold mb-6 font-mono flex items-center justify-center lg:justify-start gap-1.5 animate-fade-in-up opacity-0" 
+              style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
+            >
+              <span>FOCUS: {typingText}</span>
+              <span className="animate-pulse">|</span>
             </div>
             
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8">
-              <Button size="lg" onClick={handleConnectWithMe} className="gradient-hero text-white shadow-glow interactive-button">
+            <div 
+              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8 animate-fade-in-up opacity-0" 
+              style={{ animationDelay: '500ms', animationFillMode: 'forwards' }}
+            >
+              <Button size="lg" onClick={handleConnectWithMe} className="gradient-hero text-white shadow-glow interactive-button rounded-full px-8 h-12 text-xs font-bold font-mono tracking-wider border border-primary/20">
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Connect With Me
               </Button>
-              <Button size="lg" onClick={handleDownloadResume} variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-md hover:shadow-glow">
+              <Button size="lg" onClick={handleDownloadResume} variant="outline" className="border-white/10 hover:border-cyan-500/40 text-white hover:text-cyan-400 bg-transparent rounded-full px-8 h-12 text-xs font-bold font-mono tracking-wider">
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </Button>
             </div>
 
-            {/* Social Links */}
-            <div className="flex justify-center lg:justify-start gap-4">
-              <a href="https://github.com/kmanish1903" target="_blank" rel="noopener noreferrer" className="group relative p-3 rounded-full bg-card/50 backdrop-blur-sm border border-border hover:border-primary transition-all duration-300 hover:scale-110">
-                <Github className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                <span className="sr-only">GitHub</span>
-              </a>
-              <a href="https://linkedin.com/in/kmanish1903" target="_blank" rel="noopener noreferrer" className="group relative p-3 rounded-full bg-card/50 backdrop-blur-sm border border-border hover:border-primary transition-all duration-300 hover:scale-110">
-                <Linkedin className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
+            {/* Horizontal Stats Row integrated directly at bottom-left */}
+            <div 
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10 w-full max-w-2xl animate-fade-in-up opacity-0" 
+              style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}
+            >
+              {/* Stat 1 */}
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-500/10 rounded-lg text-blue-400">
+                  <FolderOpen className="h-5 w-5" />
+                </div>
+                <div className="text-left">
+                  <div className="text-lg font-bold text-white leading-none">10+</div>
+                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Projects Completed</div>
+                </div>
+              </div>
+              {/* Stat 2 */}
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-green-500/10 rounded-lg text-green-400">
+                  <Layers className="h-5 w-5" />
+                </div>
+                <div className="text-left">
+                  <div className="text-lg font-bold text-white leading-none">5+</div>
+                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Technologies</div>
+                </div>
+              </div>
+              {/* Stat 3 */}
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-purple-500/10 rounded-lg text-purple-400">
+                  <Terminal className="h-5 w-5" />
+                </div>
+                <div className="text-left">
+                  <div className="text-lg font-bold text-white leading-none">2000+</div>
+                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Lines of Code</div>
+                </div>
+              </div>
+              {/* Stat 4 */}
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-amber-500/10 rounded-lg text-amber-400">
+                  <Star className="h-5 w-5" />
+                </div>
+                <div className="text-left">
+                  <div className="text-lg font-bold text-white leading-none">100%</div>
+                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Dedication</div>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Right Side - 3D Workspace */}
-          <div className="flex-1 w-full max-w-xl lg:max-w-none">
+          <div 
+            className="flex-1 w-full max-w-xl lg:max-w-none animate-scale-in opacity-0" 
+            style={{ animationDelay: '700ms', animationFillMode: 'forwards' }}
+          >
             <Suspense fallback={
               <div className="h-[300px] lg:h-[500px] w-full flex items-center justify-center">
                 <div className="text-center space-y-4">
