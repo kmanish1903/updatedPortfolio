@@ -241,7 +241,7 @@ const Certificates = () => {
   };
 
   return (
-    <section id="certificates" className="py-12 bg-background relative overflow-hidden select-none scroll-mt-20">
+    <section id="certificates" className="py-12 bg-transparent relative overflow-hidden select-none scroll-mt-20">
       {/* Background glow highlights */}
       <div className="absolute left-1/4 top-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
       <div className="absolute right-1/4 bottom-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
@@ -251,10 +251,10 @@ const Certificates = () => {
         {/* Section Header */}
         <div className="text-center mb-6 reveal">
           <p className="text-xs uppercase tracking-widest text-primary font-bold mb-2">My Achievements</p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             Certificates
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto">
             Highlighting certifications and achievements that reflect my growth and expertise.
           </p>
         </div>
@@ -262,9 +262,7 @@ const Certificates = () => {
         {/* 3D coverflow Carousel Frame */}
         <div className="relative w-full overflow-hidden py-4 flex flex-col items-center justify-center min-h-[350px] reveal-scale" style={{ transitionDelay: '150ms' }}>
           
-          {/* Left / Right edge fade gradients */}
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background via-background/20 to-transparent z-30 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background via-background/20 to-transparent z-30 pointer-events-none" />
+
 
           {/* Perspective viewport wrapper */}
           <div 
@@ -291,7 +289,7 @@ const Certificates = () => {
                       resetAutoplay();
                     }
                   }}
-                  className="absolute rounded-xl overflow-hidden bg-card/60 backdrop-blur-md w-[230px] h-[172px] sm:w-[280px] sm:h-[210px] transform-style-3d group"
+                  className="absolute rounded-xl overflow-hidden bg-black/40 backdrop-blur-md w-[230px] h-[172px] sm:w-[280px] sm:h-[210px] transform-style-3d group"
                 >
                   {/* Certificate Screenshot Image Face */}
                   <img 
@@ -302,11 +300,11 @@ const Certificates = () => {
 
                   {/* Sleek verified hover overlay bar on the active card */}
                   {isCenter && (
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4">
                       <div className="space-y-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                         <div className="text-left">
-                          <h4 className="text-xs font-bold text-foreground line-clamp-1">{cert.title}</h4>
-                          <p className="text-[10px] text-muted-foreground mt-0.5">{cert.issuer}</p>
+                          <h4 className="text-xs font-bold text-white line-clamp-1">{cert.title}</h4>
+                          <p className="text-[10px] text-white/70 mt-0.5">{cert.issuer}</p>
                         </div>
                         <Button 
                           size="sm"
@@ -330,7 +328,7 @@ const Certificates = () => {
 
           {/* Active card details HUD directly beneath Coverflow */}
           <div className="text-center mt-6 mb-4 h-10 animate-fade-in">
-            <h3 className="text-lg font-bold text-foreground transition-colors duration-300">
+            <h3 className="text-lg font-bold text-white transition-colors duration-300">
               {certificates[activeIndex].title}
             </h3>
             <p className="text-xs text-primary uppercase tracking-widest font-mono font-semibold mt-1 transition-colors duration-300">
@@ -341,12 +339,12 @@ const Certificates = () => {
           {/* Slider Controls (Arrow Circle HUD & Dot navigators) */}
           <div className="flex flex-col items-center gap-4 mt-2">
             {/* Unified glassmorphism pill capsule container */}
-            <div className="flex items-center gap-4 px-4 py-2 rounded-full border border-white/10 bg-card/40 backdrop-blur-md relative z-40 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+            <div className="flex items-center gap-4 px-4 py-2 rounded-full border border-white/10 bg-black/35 backdrop-blur-md relative z-40 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
               {/* Previous button */}
               <button 
                 onClick={handlePrev}
                 onMouseEnter={playHover}
-                className="w-8 h-8 rounded-full border border-white/10 bg-black/40 text-foreground hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center interactive-button"
+                className="w-8 h-8 rounded-full border border-white/10 bg-black/40 text-white hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center interactive-button"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -362,7 +360,7 @@ const Certificates = () => {
                       w-2 h-2 rounded-full transition-all duration-300
                       ${index === activeIndex 
                         ? 'w-4 bg-primary shadow-[0_0_8px_rgba(0,240,255,0.8)]' 
-                        : 'bg-muted-foreground/30 hover:bg-muted-foreground/75'
+                        : 'bg-white/20 hover:bg-white/60'
                       }
                     `}
                   />
@@ -373,14 +371,14 @@ const Certificates = () => {
               <button 
                 onClick={handleNext}
                 onMouseEnter={playHover}
-                className="w-8 h-8 rounded-full border border-white/10 bg-black/40 text-foreground hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center interactive-button"
+                className="w-8 h-8 rounded-full border border-white/10 bg-black/40 text-white hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center interactive-button"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
 
             {/* Gesture Guide text with Mouse dragging/scrolling icon */}
-            <div className="flex items-center gap-2 text-[10px] text-muted-foreground uppercase tracking-widest font-mono font-medium mt-2">
+            <div className="flex items-center gap-2 text-[10px] text-white/50 uppercase tracking-widest font-mono font-medium mt-2">
               <Mouse className="w-3.5 h-3.5 text-primary animate-pulse" />
               <span>Drag, swipe, or scroll</span>
             </div>

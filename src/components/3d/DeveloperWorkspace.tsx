@@ -74,7 +74,7 @@ const DeveloperWorkspace = () => {
       <Suspense fallback={<LoadingFallback />}>
         <Canvas
           shadows
-          dpr={[1, isMobile ? 1.5 : 2]}
+          dpr={1}
           gl={{ 
             antialias: true,
             alpha: true,
@@ -85,9 +85,6 @@ const DeveloperWorkspace = () => {
           <Scene />
         </Canvas>
       </Suspense>
-      
-      {/* Gradient overlay for better blending */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background via-transparent to-transparent opacity-30" />
     </div>
   );
 };

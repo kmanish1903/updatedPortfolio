@@ -473,8 +473,8 @@ const Projects = () => {
           {project.githubUrl && project.githubUrl !== '#' && (
             <Button 
               size="sm" 
-              variant="outline" 
-              className="border-primary text-primary hover:bg-primary hover:text-white interactive-button"
+              variant="ghost" 
+              className="bg-transparent hover:bg-primary/10 border border-primary/40 text-primary hover:text-primary-hover interactive-button"
               onClick={() => window.open(project.githubUrl, '_blank')}
             >
               <Github className="mr-2 h-4 w-4" />
@@ -506,14 +506,14 @@ const Projects = () => {
             {/* Card 1: Featured */}
             <div 
               onClick={() => setActiveCategory('featured')}
-              className="group relative p-6 rounded-2xl glass-card border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
+              className="group relative p-6 rounded-2xl bg-black/25 backdrop-blur-md border border-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
             >
               <div>
                 <div className="p-3 bg-primary/10 rounded-xl text-primary w-fit mb-4 group-hover:scale-110 transition-transform">
                   <Sparkles className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors mb-2">Featured Projects</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">Full-stack web applications and AI-powered mental wellness platforms.</p>
+                <p className="text-xs text-white/60 leading-relaxed">Full-stack web applications and AI-powered mental wellness platforms.</p>
               </div>
               <div className="flex justify-between items-center mt-4">
                 <span className="text-[10px] font-bold font-mono text-cyan-400 tracking-wider">3 PROJECTS</span>
@@ -524,14 +524,14 @@ const Projects = () => {
             {/* Card 2: ReactJS */}
             <div 
               onClick={() => setActiveCategory('react')}
-              className="group relative p-6 rounded-2xl glass-card border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
+              className="group relative p-6 rounded-2xl bg-black/25 backdrop-blur-md border border-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
             >
               <div>
                 <div className="p-3 bg-cyan-500/10 rounded-xl text-cyan-400 w-fit mb-4 group-hover:scale-110 transition-transform">
                   <Code2 className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors mb-2">React.js Apps</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">Interactive client-side web applications and UI state management widgets.</p>
+                <p className="text-xs text-white/60 leading-relaxed">Interactive client-side web applications and UI state management widgets.</p>
               </div>
               <div className="flex justify-between items-center mt-4">
                 <span className="text-[10px] font-bold font-mono text-cyan-400 tracking-wider">12 PROJECTS</span>
@@ -542,14 +542,14 @@ const Projects = () => {
             {/* Card 3: Dynamic JS */}
             <div 
               onClick={() => setActiveCategory('dynamic')}
-              className="group relative p-6 rounded-2xl glass-card border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
+              className="group relative p-6 rounded-2xl bg-black/25 backdrop-blur-md border border-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
             >
               <div>
                 <div className="p-3 bg-purple-500/10 rounded-xl text-purple-400 w-fit mb-4 group-hover:scale-110 transition-transform">
                   <Layers className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold text-white group-hover:text-purple-400 transition-colors mb-2">Dynamic Web Apps</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">Interactive JavaScript games, controllers, timers, and array sandboxes.</p>
+                <p className="text-xs text-white/60 leading-relaxed">Interactive JavaScript games, controllers, timers, and array sandboxes.</p>
               </div>
               <div className="flex justify-between items-center mt-4">
                 <span className="text-[10px] font-bold font-mono text-cyan-400 tracking-wider">10 PROJECTS</span>
@@ -560,14 +560,14 @@ const Projects = () => {
             {/* Card 4: Static */}
             <div 
               onClick={() => setActiveCategory('static')}
-              className="group relative p-6 rounded-2xl glass-card border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
+              className="group relative p-6 rounded-2xl bg-black/25 backdrop-blur-md border border-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between min-h-[200px]"
             >
               <div>
                 <div className="p-3 bg-amber-500/10 rounded-xl text-amber-400 w-fit mb-4 group-hover:scale-110 transition-transform">
                   <Code2 className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors mb-2">Static Templates</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">HTML5/CSS3 templates demonstrating semantic structures and grid layouts.</p>
+                <p className="text-xs text-white/60 leading-relaxed">HTML5/CSS3 templates demonstrating semantic structures and grid layouts.</p>
               </div>
               <div className="flex justify-between items-center mt-4">
                 <span className="text-[10px] font-bold font-mono text-cyan-400 tracking-wider">1 PROJECT</span>
@@ -580,9 +580,9 @@ const Projects = () => {
             {/* Back Button */}
             <div className="flex justify-start mb-8">
               <Button 
-                variant="outline" 
+                variant="ghost" 
                 onClick={() => setActiveCategory(null)}
-                className="border-white/10 hover:border-cyan-400 text-white hover:text-cyan-400 bg-transparent rounded-full px-6 h-10 text-xs font-bold font-mono tracking-wider transition-all duration-300 hover:-translate-x-1"
+                className="bg-transparent hover:bg-white/5 border border-white/10 text-white hover:text-cyan-400 rounded-full px-6 h-10 text-xs font-bold font-mono tracking-wider transition-all duration-300 hover:-translate-x-1"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 BACK TO CATEGORIES
@@ -633,8 +633,8 @@ const Projects = () => {
                       </Button>
                       <Button 
                         size="lg" 
-                        variant="outline" 
-                        className="border-white/10 hover:border-primary text-foreground hover:text-white bg-transparent interactive-button w-full h-11 px-8 text-xs font-bold font-mono rounded-full"
+                        variant="ghost" 
+                        className="bg-transparent hover:bg-primary/10 border border-white/10 text-white hover:text-primary interactive-button w-full h-11 px-8 text-xs font-bold font-mono rounded-full"
                         onClick={() => window.open('https://github.com/kmanish1903', '_blank')}
                       >
                         <Github className="mr-2.5 h-4 w-4" />

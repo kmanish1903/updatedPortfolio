@@ -18,7 +18,7 @@ const About = () => {
     title: 'Core Values',
     description: 'Consistency, Confidence, and Clarity'
   }];
-  return <section id="about" className="relative py-20 overflow-hidden bg-background">
+  return <section id="about" className="relative py-20 overflow-hidden bg-transparent">
       {/* Animated Background Decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float"></div>

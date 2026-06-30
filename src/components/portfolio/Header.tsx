@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { getMutedState, setMutedState, playClick, playHover } from '@/lib/audio';
 
 const Header = () => {
@@ -75,9 +74,9 @@ const Header = () => {
   return (
     <header 
       className={`
-        fixed top-0 left-0 right-0 z-50 border-b border-border shadow-lg
+        fixed top-0 left-0 right-0 z-50 border-b
         transition-all duration-300
-        ${scrolled ? 'bg-background/95 backdrop-blur-lg' : 'bg-background/80 backdrop-blur-md'}
+        ${scrolled ? 'bg-black/15 backdrop-blur-md border-white/5 shadow-sm' : 'bg-transparent border-transparent'}
       `}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,7 +101,7 @@ const Header = () => {
                   onMouseEnter={playHover}
                   className={`
                     relative text-sm font-medium transition-all duration-300
-                    ${isActive ? 'text-primary scale-105' : 'text-muted-foreground hover:text-foreground'}
+                    ${isActive ? 'text-cyan-400 scale-105 font-bold' : 'text-white/70 hover:text-white'}
                   `}
                 >
                   {item.label}
@@ -124,12 +123,12 @@ const Header = () => {
               onClick={handleSoundToggle}
               onMouseEnter={playHover}
               title={soundMuted ? "Unmute interface sound effects" : "Mute interface sound effects"}
-              className="text-muted-foreground hover:text-primary transition-colors h-9 w-9 rounded-md"
+              className="text-white/60 hover:text-primary transition-colors h-9 w-9 rounded-md"
             >
               {soundMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4 animate-pulse text-primary" />}
             </Button>
 
-            <ThemeToggle />
+
             
             <Button
               variant="ghost"
@@ -146,7 +145,7 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden animate-fade-in">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-card border-t border-border">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-black/85 backdrop-blur-lg border-t border-white/5">
               {navItems.map((item) => {
                 const isActive = activeSection === item.href.substring(1);
                 return (
@@ -157,8 +156,8 @@ const Header = () => {
                     className={`
                       block w-full text-left px-3 py-2 rounded-lg transition-all duration-300
                       ${isActive 
-                        ? 'text-primary bg-primary/10 font-medium' 
-                        : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+                        ? 'text-cyan-400 bg-white/5 font-semibold' 
+                        : 'text-white/70 hover:text-white hover:bg-white/5'
                       }
                     `}
                   >

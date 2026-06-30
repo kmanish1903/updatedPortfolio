@@ -90,13 +90,13 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-10 bg-background scroll-mt-20">
+    <section id="contact" className="py-10 bg-transparent scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 reveal">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
             Let's Connect
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-white/75 max-w-2xl mx-auto">
             I'm always open to discussing new opportunities, interesting projects, 
             or just having a conversation about technology and development.
           </p>
@@ -106,12 +106,12 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="space-y-4 reveal-left">
             <div>
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Get in Touch</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">Get in Touch</h3>
+              <p className="text-sm text-white/70 leading-relaxed mb-2">
                 B.Tech CSE (AI & ML) graduate – 2026, seeking opportunities as a Full-Stack Developer (MERN). 
                 Passionate about building scalable web applications and learning DevOps practices.
               </p>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              <p className="text-sm text-white/70 leading-relaxed mb-4">
                 Open to projects, collaborations, and meaningful tech conversations.
               </p>
             </div>
@@ -125,23 +125,23 @@ const Contact = () => {
                   glareEnabled={false}
                   className="block"
                 >
-                  <div className="flex items-center space-x-4 p-2.5 rounded-lg bg-card/50 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-300">
+                  <div className="flex items-center space-x-4 p-2.5 rounded-lg bg-black/25 backdrop-blur-md border border-white/5 hover:border-primary/40 transition-all duration-300">
                     <div className="flex-shrink-0 p-2 bg-primary/10 rounded-lg">
                       <contact.icon className="h-4.5 w-4.5 text-primary" />
                     </div>
                     <div>
-                      <p className="text-xs sm:text-sm font-medium text-foreground">{contact.label}</p>
+                      <p className="text-xs sm:text-sm font-semibold text-white/90">{contact.label}</p>
                       {contact.href ? (
                         <a 
                           href={contact.href}
-                          className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-smooth break-all sm:break-normal block"
+                          className="text-xs sm:text-sm text-white/60 hover:text-primary transition-smooth break-all sm:break-normal block"
                           target={contact.href.startsWith('http') ? '_blank' : undefined}
                           rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                         >
                           {contact.value}
                         </a>
                       ) : (
-                        <p className="text-xs sm:text-sm text-muted-foreground break-all sm:break-normal">{contact.value}</p>
+                        <p className="text-xs sm:text-sm text-white/60 break-all sm:break-normal">{contact.value}</p>
                       )}
                     </div>
                   </div>
@@ -153,18 +153,18 @@ const Contact = () => {
             <div className="pt-4">
               <div className="flex space-x-4">
                 <Button 
-                  variant="outline" 
+                  variant="ghost" 
                   size="default" 
-                  className="flex-1 h-10 border-primary text-primary hover:bg-primary hover:text-white interactive-button"
+                  className="flex-1 h-10 bg-transparent hover:bg-primary/10 border border-primary/40 text-primary hover:text-white interactive-button transition-all duration-300"
                   onClick={() => window.open('https://linkedin.com/in/kmanish1903', '_blank')}
                 >
                   <Linkedin className="mr-2 h-4 w-4" />
                   LinkedIn
                 </Button>
                 <Button 
-                  variant="outline" 
+                  variant="ghost" 
                   size="default" 
-                  className="flex-1 h-10 border-primary text-primary hover:bg-primary hover:text-white interactive-button"
+                  className="flex-1 h-10 bg-transparent hover:bg-primary/10 border border-primary/40 text-primary hover:text-white interactive-button transition-all duration-300"
                   onClick={() => window.open('https://github.com/kmanish1903', '_blank')}
                 >
                   <Github className="mr-2 h-4 w-4" />
@@ -176,16 +176,16 @@ const Contact = () => {
 
           {/* Contact Form with 3D effect */}
           <TiltCard tiltAmount={3} glareEnabled={true} className="reveal-right" style={{ transitionDelay: '150ms' }}>
-            <Card className="gradient-card border-0 shadow-custom">
-              <CardHeader className="py-4">
-                <CardTitle className="text-xl font-bold text-foreground">
+            <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-custom">
+              <div className="mb-4">
+                <h3 className="text-xl font-bold text-white">
                   Send a Message
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pb-4 pt-0">
+                </h3>
+              </div>
+              <div>
                 <form onSubmit={handleSubmit} className="space-y-3.5">
                   <div>
-                    <label htmlFor="name" className="block text-xs font-medium text-foreground mb-1">
+                    <label htmlFor="name" className="block text-xs font-semibold text-white/80 mb-1 font-mono tracking-wider uppercase">
                       Your Name
                     </label>
                     <Input
@@ -196,12 +196,12 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Enter your full name"
-                      className="h-9 bg-background border-border focus:border-primary text-sm"
+                      className="h-9 bg-black/35 border-white/10 focus:border-primary text-white placeholder:text-white/35 text-sm"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-xs font-medium text-foreground mb-1">
+                    <label htmlFor="email" className="block text-xs font-semibold text-white/80 mb-1 font-mono tracking-wider uppercase">
                       Email Address
                     </label>
                     <Input
@@ -212,12 +212,12 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="Enter your email address"
-                      className="h-9 bg-background border-border focus:border-primary text-sm"
+                      className="h-9 bg-black/35 border-white/10 focus:border-primary text-white placeholder:text-white/35 text-sm"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-xs font-medium text-foreground mb-1">
+                    <label htmlFor="message" className="block text-xs font-semibold text-white/80 mb-1 font-mono tracking-wider uppercase">
                       Message
                     </label>
                     <Textarea
@@ -228,7 +228,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       placeholder="Tell me about your project or just say hello..."
-                      className="bg-background border-border focus:border-primary resize-none text-sm"
+                      className="bg-black/35 border-white/10 focus:border-primary resize-none text-white placeholder:text-white/35 text-sm"
                     />
                   </div>
 
@@ -251,8 +251,8 @@ const Contact = () => {
                     )}
                   </Button>
                 </form>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </TiltCard>
         </div>
       </div>

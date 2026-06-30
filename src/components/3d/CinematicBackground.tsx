@@ -54,10 +54,10 @@ const ENV_CONFIGS: Record<string, EnvConfig> = {
   },
   skills: {
     scale: 'scale-116',
-    brightness: 'brightness-75',
+    brightness: 'brightness-95',
     fogOpacity: 0.15,
-    overlayOpacity: 0.78,
-    gradientClass: 'bg-gradient-to-tr from-indigo-950/20 via-black/40 to-transparent mix-blend-multiply opacity-100',
+    overlayOpacity: 0.45,
+    gradientClass: 'bg-gradient-to-tr from-indigo-950/10 via-purple-900/10 to-transparent mix-blend-overlay opacity-100',
     particleType: 'stars',
   },
   certificates: {
@@ -139,13 +139,27 @@ const CinematicBackground = ({ stage, activeSection = 'about', scrollY, isMobile
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-[#090d16] select-none">
-      {/* 1. Base Mountain Landscape Image Layer */}
+      {/* 1. Fallback Image Background Layer */}
       <div 
-        className={`absolute inset-0 bg-cover bg-center transition-cinematic pointer-events-none ${config.scale} ${config.brightness}`}
+        className={`absolute inset-0 bg-cover bg-center pointer-events-none ${config.scale} ${config.brightness}`}
         style={{
           backgroundImage: `url(${backgroundSrc})`,
         }}
       />
+
+      {/* 2. Video Background Layer - only active on large screens after entering portfolio */}
+      {stage !== 'gateway' && stage !== 'loading' && !isMobile && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className={`absolute inset-0 w-full h-full object-cover transition-cinematic pointer-events-none animate-fade-in ${config.scale} ${config.brightness}`}
+          style={{ animationDuration: '2.5s' }}
+        >
+          <source src="/new_bg_video.mp4" type="video/mp4" />
+        </video>
+      )}
 
       {/* 2. mix-blend Color Tint Grading Overlay */}
       <div className={`absolute inset-0 pointer-events-none transition-cinematic ${config.gradientClass}`} />

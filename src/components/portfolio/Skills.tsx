@@ -51,24 +51,24 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-10 bg-background relative overflow-hidden scroll-mt-20">
+    <section id="skills" className="py-10 bg-transparent relative overflow-hidden scroll-mt-20">
       {/* Glow background decoration */}
       <div className="absolute right-0 top-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute left-0 bottom-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-6 reveal">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
             Skills
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto">
             A curated set of technologies I use to design, develop, and deploy modern applications.
           </p>
         </div>
 
         {/* Category Tabs */}
         <div className="mb-5 flex justify-center">
-          <div className="inline-flex flex-wrap gap-2 p-1 rounded-lg bg-card/50 backdrop-blur-sm border border-border">
+          <div className="inline-flex flex-wrap gap-2 p-1 rounded-lg bg-black/35 backdrop-blur-md border border-white/10">
             {categories.map((category) => (
               <button
                 key={category.id}
@@ -79,7 +79,7 @@ const Skills = () => {
                   ${
                     activeCategory === category.id
                       ? 'gradient-hero text-white shadow-glow'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+                      : 'text-white/60 hover:text-white hover:bg-white/5'
                   }
                 `}
               >
@@ -99,8 +99,8 @@ const Skills = () => {
           {/* Skills Grid Card with 3D Tilt */}
           <div className="flex-1 w-full max-w-xl lg:max-w-none reveal-right" style={{ transitionDelay: '150ms' }}>
             <TiltCard tiltAmount={4} glareEnabled={true}>
-              <Card className="gradient-card border-0 shadow-custom bg-card/60 backdrop-blur-md">
-                <CardContent className="p-4">
+              <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-custom">
+                <div>
                   <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
                     {allSkills.map((skill, index) => {
                       const isHighlighted = isSkillHighlighted(skill);
@@ -114,19 +114,19 @@ const Skills = () => {
                             transition-all duration-300 border border-transparent
                             ${
                               isHighlighted
-                                ? 'scale-105 opacity-100 bg-primary/5 border-primary/10 hover:border-primary/30 hover:bg-primary/10'
-                                : 'scale-95 opacity-40'
+                                ? 'scale-105 opacity-100 bg-transparent border border-white/5 hover:border-primary/30 hover:bg-primary/5'
+                                : 'scale-95 opacity-40 bg-transparent border-transparent'
                             }
                           `}
                           style={{
                             transitionDelay: `${index * 12}ms`,
                           }}
                         >
-                          {/* Icon with 3D hover effect */}
+                          {/* Icon with 3D hover effect - forced to be bright white/cyan rather than theme text */}
                           <div
                             className={`
-                              text-xl transition-all duration-300
-                              ${isHighlighted ? 'group-hover:scale-120 group-hover:-translate-y-0.5' : ''}
+                              text-xl transition-all duration-300 font-bold
+                              ${isHighlighted ? 'text-cyan-400 group-hover:scale-120 group-hover:-translate-y-0.5' : 'text-white/40'}
                             `}
                           >
                             {skill.icon}
@@ -138,8 +138,8 @@ const Skills = () => {
                               text-[10px] sm:text-xs font-semibold text-center transition-colors duration-300
                               ${
                                 isHighlighted
-                                  ? 'text-foreground'
-                                  : 'text-muted-foreground/60'
+                                  ? 'text-white'
+                                  : 'text-white/40'
                               }
                             `}
                           >
@@ -154,8 +154,8 @@ const Skills = () => {
                       );
                     })}
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </TiltCard>
           </div>
         </div>
